@@ -1,6 +1,7 @@
 <?php
    namespace Routes;
 
+   use Controllers\CategoriasController;
    use Controllers\ContactoController;
    use Lib\Router;
    use Controllers\ErrorController;
@@ -11,8 +12,14 @@
             return "Bienvenido";
         });
 
-        Router::add('GET','/', function (){
-            return (new ContactoController())->mostrarTodos();
+         // Route to list all categorias
+         Router::add('GET','/categorias', function () {
+            return (new CategoriasController())->mostrarTodos();
+        });
+
+
+        /*Router::add('GET','/', function (){
+            return (new CategoriasController())->mostrarTodos();
         });
         /*Router::add('GET','public/', function (){
             return (new ContactoController())->mostrarTodos();
@@ -36,13 +43,3 @@
         Router::dispatch();
     }
   }
-    
-    
-
-
-
-    
-
-
-
-    

@@ -22,10 +22,12 @@ class ComposerStaticInit743d9f6cfceec79c8e20a320e89417d2
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Services\\' => 9,
         ),
         'R' => 
         array (
             'Routes\\' => 7,
+            'Repositories\\' => 13,
         ),
         'P' => 
         array (
@@ -37,7 +39,7 @@ class ComposerStaticInit743d9f6cfceec79c8e20a320e89417d2
         ),
         'L' => 
         array (
-            'Lucia\\Zapateria\\' => 16,
+            'Lucia\\zapateria\\' => 16,
             'Lib\\' => 4,
         ),
         'G' => 
@@ -71,9 +73,17 @@ class ComposerStaticInit743d9f6cfceec79c8e20a320e89417d2
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
+        'Services\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Services',
+        ),
         'Routes\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/Routes',
+        ),
+        'Repositories\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Repositories',
         ),
         'PhpOption\\' => 
         array (
@@ -83,7 +93,7 @@ class ComposerStaticInit743d9f6cfceec79c8e20a320e89417d2
         array (
             0 => __DIR__ . '/../..' . '/src/Models',
         ),
-        'Lucia\\Zapateria\\' => 
+        'Lucia\\zapateria\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

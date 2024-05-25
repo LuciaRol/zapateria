@@ -13,6 +13,6 @@ class Pages {
         $arriba = dirname(__DIR__, 1);
 
         /* require_once 'Views/layout/header.php'; */
-        require_once "Views/" . $pageName . ".php";
-    }
+        require_once "src/Views/$pageName.php"; 
+        }
 }

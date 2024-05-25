@@ -1,0 +1,25 @@
+{
+    "name": "lucia/zapateria",
+    "description": "web de una tienda de zapatos",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Lucia\\Zapateria\\": "src/",
+            "Routes\\": "src/Routes/",
+            "Controllers\\": "src/Controllers/",
+            "Lib\\": "src/Lib/",
+            "Models\\": "src/Models/",
+            "Views\\": "src/Views/"
+        }
+    },
+    "authors": [
+        {
+            "name": "luciarol",
+            "email": "luciarol87@gmail.com"
+        }
+    ],
+    "require": {
+        "stefangabos/zebra_pagination": "^2.4",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

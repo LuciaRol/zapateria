@@ -34,6 +34,6 @@ class CategoriasController {
         }
 
         // Devolver la renderización de la página con los objetos de categoría
-        return $this->pagina->render('mostrarCategorias', ['categorias' => $categoriasModel]);
+        return $this->pagina->render('mostrarPrincipal', ['categorias' => $categoriasModel]);
     }
 }

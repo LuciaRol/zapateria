@@ -16,8 +16,20 @@
             return (new CategoriasController())->mostrarTodos();
         });
 
-        Router::add('GET','/registro_usuario', function () {
-            return (new CategoriasController())->registroUsuario();
+        Router::add('POST', '/registro_usuario', function () {
+            // Verifica si se ha enviado el formulario de registro
+            if (isset($_POST['registro'])) {
+                // Obtener los datos del formulario
+                $nombre = $_POST['nombre'];
+                $apellidos = $_POST['apellidos'];
+                $email = $_POST['email'];
+                $contrasena = $_POST['contrasena'];
+                $rol = 'usur'; // El rol por defecto es usuario
+                
+                // Llamar al controlador y pasar los datos al método registroUsuario
+                $categoriasController = new CategoriasController();
+                $categoriasController->registroUsuario($nombre, $apellidos, $email, $contrasena, $rol);
+            }
         });
 
 

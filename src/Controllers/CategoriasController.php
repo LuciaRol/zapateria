@@ -46,8 +46,8 @@ class CategoriasController {
         return $this->pagina->render('mostrarPrincipal', ['categorias' => $categoriasModel]);
     }
 
-    public function registroUsuario() {
-        // Verifica si se ha enviado el formulario de registro
+    public function registroUsuario($nombre, $apellidos, $email, $contrasena, $rol) {
+        // Verificar si se ha enviado el formulario de registro
         if (isset($_POST['registro'])) {
             // Obtiene los datos del formulario
             $nombre = $_POST['nombre'];
@@ -56,32 +56,15 @@ class CategoriasController {
             $contrasena = $_POST['contrasena'];
             $rol = 'usur'; // Todos los usuarios son 'usur' por defecto
             
-          
-            // Validar y sanear los datos del usuario
-            // $usuarioSaneado = $this->validarSanear($nombre, $apellidos, $email, $rol);
-            // if (!$usuarioSaneado) {
-            //     // Si los datos no son válidos, detiene el proceso de registro
-            //     return;
-            // }
-    
-            // // Los datos saneados ahora están disponibles para su uso
-            // $nombre = $usuarioSaneado['nombre'];
-            // $apellidos = $usuarioSaneado['apellidos'];
-            // $email = $usuarioSaneado['email'];
-            // $username = $usuarioSaneado['username'];
-            // $rol = $usuarioSaneado['rol'];
-    
-            // Llama al servicio de usuarios para registrar al usuario con los datos saneados
+            // Llama al servicio de usuarios para registrar al usuario con los datos obtenidos
             $usuariosService = new UsuariosService();
             $resultado = $usuariosService->register($nombre, $apellidos, $email, $contrasena, $rol);
     
-            // Ejecuta la función mostrarBlog()
             $this->mostrarTodos();
-    
-            // Sal del método registroUsuario()
-            return;
+            exit; // Terminar la ejecución del script después de la redirección
+            }
         }
-    }
+}
 
     // public function validarSanear($nombre, $apellidos, $email, $rol) {
     //     // Validar los valores
@@ -102,6 +85,3 @@ class CategoriasController {
     // }
 
 
-
-
-}

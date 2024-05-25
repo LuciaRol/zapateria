@@ -26,7 +26,7 @@
                 echo "</ul>";
             }
             ?>
-            <form action="<?= BASE_URL ?>categorias" method="POST">
+            <form action="<?= BASE_URL ?>registro_usuario" method="POST">
                 <!-- Campos del formulario para el registro de usuario -->
                 <input type="text" name="nombre" placeholder="Nombre">
                 <input type="text" name="apellidos" placeholder="Apellidos">

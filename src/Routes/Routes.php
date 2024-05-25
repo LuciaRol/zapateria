@@ -11,10 +11,10 @@
             return "Bienvenido";
         });
 
-        /* Router::add('GET','/', function (){
+        Router::add('GET','/', function (){
             return (new ContactoController())->mostrarTodos();
         });
-        Router::add('GET','public/', function (){
+        /*Router::add('GET','public/', function (){
             return (new ContactoController())->mostrarTodos();
         }); */
 

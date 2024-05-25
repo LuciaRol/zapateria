@@ -8,7 +8,7 @@
     <h1>Categorías</h1>
     <ul>
         <?php foreach ($categorias as $categoria): ?>
-            <li><?php echo $categoria['nombre']; ?></li>
+            <li>ID: <?php echo $categoria->getId(); ?>, Nombre: <?php echo $categoria->getNombre(); ?></li>
         <?php endforeach; ?>
     </ul>
 </body>

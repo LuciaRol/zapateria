@@ -20,8 +20,7 @@ class CategoriasController {
     }
     public function mostrarTodos() {
         $categorias = $this->categoriasService->obtenerCategorias();
-        return $this->pagina->render('mostrarCategorias');
+        return $this->pagina->render('mostrarCategorias', ['categorias' => $categorias]);
     }
-  
 }
 

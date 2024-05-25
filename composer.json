@@ -4,14 +4,14 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Lucia\\zapateria\\": "./src/",
-            "Routes\\": "./src/Routes/",
-            "Controllers\\": "./src/Controllers/",
-            "Lib\\": "./src/Lib/",
-            "Models\\": "./src/Models/",
-            "Views\\": "./src/Views/",
-            "Repositories\\":"./src/Repositories/",
-            "Services\\":"./src/Services/"
+            "Lucia\\zapateria\\": "src/",
+            "Routes\\": "src/Routes/",
+            "Controllers\\": "src/Controllers/",
+            "Lib\\": "src/Lib/",
+            "Models\\": "src/Models/",
+            "Views\\": "src/Views/",
+            "Repositories\\":"src/Repositories/",
+            "Services\\":"src/Services/"
         }
     },
     "authors": [

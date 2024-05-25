@@ -2,7 +2,7 @@
 USE tienda;
 
 -- Insertar datos en la tabla usuarios
-INSERT INTO usuarios (nombre, apellidos, email, password, rol) VALUES
+INSERT INTO usuarios (nombre, apellidos, email, contrasena, rol) VALUES
 ('Juan', 'Pérez López', 'juan.perez@example.com', 'password123', 'cliente'),
 ('Ana', 'García Sánchez', 'ana.garcia@example.com', 'password456', 'admin'),
 ('Luis', 'Rodríguez Fernández', 'luis.rodriguez@example.com', 'password789', 'cliente');

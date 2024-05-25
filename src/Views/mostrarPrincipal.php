@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,19 +26,15 @@
                 echo "</ul>";
             }
             ?>
-            <form action="<?= BASE_URL ?>?controller=Blog&action=registroUsuario" method="POST">
-            <div class="sidebar_inputs">
-           
-                <input type="text" class="sidebar_input" placeholder="Nombre" name="nombre">
-                <input type="text" class="sidebar_input" placeholder="Apellidos" name="apellidos">
-                <input type="email" class="sidebar_input" placeholder="Email" name="email">
-                <input type="username" class="sidebar_input" placeholder="Username" name="username">
-                <input type="password" class="sidebar_input" placeholder="Contraseña" name="contrasena">
-                <button type="submit" class="sidebar_btn" name="registro">Registrarse</button>
-
-           
-            </div>
+            <form action="<?= BASE_URL ?>categorias" method="POST">
+                <!-- Campos del formulario para el registro de usuario -->
+                <input type="text" name="nombre" placeholder="Nombre">
+                <input type="text" name="apellidos" placeholder="Apellidos">
+                <input type="text" name="email" placeholder="Email">
+                <input type="password" name="contrasena" placeholder="Contraseña">
+                <button type="submit" name="registro">Registrarse</button>
             </form>
-        </aside>       
+            <a href="<?= BASE_URL ?>registro_usuario" class="button">Ir a Categorías</a>
+
 </body>
 </html>

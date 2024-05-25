@@ -11,10 +11,13 @@
         Router::add('GET','/', function (){
             return "Bienvenido";
         });
-
-         // Route to list all categorias
-         Router::add('GET','/categorias', function () {
+        
+        Router::add('GET','/categorias', function () {
             return (new CategoriasController())->mostrarTodos();
+        });
+
+        Router::add('GET','/registro_usuario', function () {
+            return (new CategoriasController())->registroUsuario();
         });
 
 

@@ -2,7 +2,7 @@
    namespace Routes;
 
    use Controllers\CategoriasController;
-   use Controllers\ContactoController;
+   use Controllers\UsuarioController;
    use Lib\Router;
    use Controllers\ErrorController;
 
@@ -27,19 +27,29 @@
                 $rol = 'usur'; // El rol por defecto es usuario
                 
                 // Llamar al controlador y pasar los datos al método registroUsuario
-                $categoriasController = new CategoriasController();
-                $categoriasController->registroUsuario($nombre, $apellidos, $email, $contrasena, $rol);
+                $usuariosController = new UsuarioController();
+                $usuariosController->registroUsuario($nombre, $apellidos, $email, $contrasena, $rol);
             }
         });
 
 
-        Router::add('GET','/login', function (){
-            return (new CategoriasController())->mostrarTodos();
+        Router::add('POST', '/login', function () {
+            // Verificar si se ha enviado el formulario de inicio de sesión
+            if (isset($_POST['email']) && isset($_POST['password'])) {
+                // Obtener el nombre de usuario y la contraseña del formulario
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+        
+                // Crear una instancia del controlador de usuarios
+                $usuariosController = new UsuarioController();
+                // Llamar al método login del controlador de usuarios con el nombre de usuario y la contraseña
+                $usuariosController->login($email, $password);
+            }
         });
-        /*
-        /*Router::add('GET','public/', function (){
-            return (new ContactoController())->mostrarTodos();
-        }); */
+        
+        Router::add('POST','/logout', function (){
+            return (new UsuarioController())->logout();
+        }); 
 
 
         Router::add('GET','/error/', function (){

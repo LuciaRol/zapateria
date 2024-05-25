@@ -32,6 +32,37 @@
             return $resultado;
         }
 
+
+        public function findByemail(string $email): ?Usuarios {
+            try {
+                $this->sql = $this->conexion->prepareSQL("SELECT * FROM usuarios WHERE email = :email LIMIT 1;");
+                $this->sql->bindValue(":email", $email, PDO::PARAM_STR);
+                $this->sql->execute();
+                // Obtén los datos como un array asociativo
+                $usuarioData = $this->sql->fetch(PDO::FETCH_ASSOC);
+                
+                $this->sql->closeCursor();
+                
+                // Verifica si se encontró un usuario
+                if ($usuarioData) {
+                    // Crea un objeto Usuarios utilizando los datos recuperados
+                    $usuario = new Usuarios(
+                        $usuarioData['id'],
+                        $usuarioData['nombre'],
+                        $usuarioData['apellidos'],
+                        $usuarioData['email'],
+                        $usuarioData['contrasena'],
+                        $usuarioData['rol']
+                    );
+                    return $usuario; // Devuelve el objeto Usuarios si se encontró el usuario
+                } else {
+                    return null; // Devuelve null si no se encontró el usuario
+                }
+            } catch (PDOException $e) {
+                return null; // Devuelve null en caso de error
+            }
+        }
+
        
         
     }

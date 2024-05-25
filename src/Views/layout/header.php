@@ -23,17 +23,16 @@
             </form>
             
         </div>
-        
 
         <div class="login_container">
-            <?php if (isset($_SESSION['username'])): ?>
-                <p>Hola, <?= htmlspecialchars($_SESSION['username']); ?></p>
-                <form action="<?= BASE_URL ?>?controller=Blog&action=logout" method="POST">
+            <?php if (isset($_SESSION['email'])): ?>
+                <p>Hola, <?= htmlspecialchars($_SESSION['email']); ?></p>
+                <form action="<?= BASE_URL ?>logout" method="POST">
                     <button type="submit" class="logout_button">Cerrar sesión</button>
                 </form>
             <?php else: ?>
-                <form action="<?= BASE_URL ?>?controller=Blog&action=login" method="POST">
-                    <input class="login_user" type="text" name="username" placeholder="Usuario" required>
+                <form action="<?= BASE_URL ?>login" method="POST">
+                    <input class="login_user" type="text" name="email" placeholder="Email" required>
                     <input class="login_pass" type="password" name="password" placeholder="Contraseña" required>
                     <button class="login_btn" type="submit">Iniciar sesión</button>
                     <?php if (isset($loginError)): ?>

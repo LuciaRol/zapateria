@@ -14,6 +14,18 @@
             return $this->userRepository->registro($nombre, $apellidos, $email, $contrasena, $rol);
         }
 
+        public function verificaCredenciales(string $email, string $password): ?Usuarios {
+            $user = $this->userRepository->findByemail($email);
+            
+            // Verifica que el usuario exista y que la contraseña coincida
+            if ($user && password_verify($password, $user->getContrasena())) {
+                return $user; // Devuelve el objeto Usuarios si las credenciales son correctas
+            } else {
+                return null; // Devuelve null si las credenciales son incorrectas
+            }
+        }
+
+
         
         
     }

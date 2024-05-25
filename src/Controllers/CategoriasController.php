@@ -23,14 +23,12 @@ class CategoriasController {
         $this->categoriasService = new CategoriasService();
 
         $this->usuariosService = new UsuariosService();
-
-
     }
 
-    public function mostrarTodos() {
+    public function mostrarTodos($emailRecordado = null) {
         // Obtener todas las categorías
         $categorias = $this->categoriasService->obtenerCategorias();
-
+    
         // Crear un array para almacenar los objetos de categoría
         $categoriasModel = [];
         foreach ($categorias as $categoria) {
@@ -41,29 +39,19 @@ class CategoriasController {
             // Agregar la instancia de Categoria al array
             $categoriasModel[] = $categoriaModel;
         }
-
-        // Devolver la renderización de la página con los objetos de categoría
-        return $this->pagina->render('mostrarPrincipal', ['categorias' => $categoriasModel]);
-    }
-
-    public function registroUsuario($nombre, $apellidos, $email, $contrasena, $rol) {
-        // Verificar si se ha enviado el formulario de registro
-        if (isset($_POST['registro'])) {
-            // Obtiene los datos del formulario
-            $nombre = $_POST['nombre'];
-            $apellidos = $_POST['apellidos'];
-            $email = $_POST['email'];
-            $contrasena = $_POST['contrasena'];
-            $rol = 'usur'; // Todos los usuarios son 'usur' por defecto
-            
-            // Llama al servicio de usuarios para registrar al usuario con los datos obtenidos
-            $usuariosService = new UsuariosService();
-            $resultado = $usuariosService->register($nombre, $apellidos, $email, $contrasena, $rol);
     
-            $this->mostrarTodos();
-            exit; // Terminar la ejecución del script después de la redirección
-            }
+        // Verificar si la sesión está activa y obtener el correo electrónico
+        $emailSesion = isset($_SESSION['email']) ? $_SESSION['email'] : null;
+    
+        // Si no hay sesión activa, utilizar el correo electrónico recordado
+        if (!$emailSesion && $emailRecordado) {
+            $emailSesion = $emailRecordado;
         }
+    
+        // Devolver la renderización de la página con los objetos de categoría y el correo electrónico de la sesión
+        return $this->pagina->render('mostrarPrincipal', ['categorias' => $categoriasModel, 'emailSesion' => $emailSesion]);
+    }
+    
 }
 
     // public function validarSanear($nombre, $apellidos, $email, $rol) {

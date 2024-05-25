@@ -23,7 +23,6 @@ class UsuarioController {
         
         $this->usuariosService = new UsuariosService();
 
-
     }
 
     public function registroUsuario($nombre, $apellidos, $email, $contrasena, $rol) {

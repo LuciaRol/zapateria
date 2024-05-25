@@ -54,22 +54,3 @@ class CategoriasController {
     
 }
 
-    // public function validarSanear($nombre, $apellidos, $email, $rol) {
-    //     // Validar los valores
-    //     $errores = Validacion::validarDatosUsuario($nombre, $apellidos, $email, $rol);
-    
-    //     // Si hay errores, asignar el mensaje de error a una variable
-    //     if (!empty($errores)) {
-    //         $this->mostrarTodos(); 
-    //         return false; // Indicar que hubo errores
-    //     }
-    
-    //     // Saneamiento de los campos
-    //     $usuarioSaneado = Validacion::sanearCamposUsuario($username, $nombre, $apellidos, $email, $rol);
-       
-        
-    //     // Devolver los campos saneados
-    //     return $usuarioSaneado;
-    // }
-
-

@@ -3,6 +3,7 @@
 
    use Controllers\CategoriasController;
    use Controllers\UsuarioController;
+   use Controllers\PedidosController;
    use Lib\Router;
    use Controllers\ErrorController;
 
@@ -49,6 +50,10 @@
         
         Router::add('POST','/logout', function (){
             return (new UsuarioController())->logout();
+        }); 
+
+        Router::add('GET','/pedidos', function (){
+            return (new PedidosController())->mostrarPedidos();
         }); 
 
 

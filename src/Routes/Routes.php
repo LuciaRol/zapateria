@@ -12,7 +12,7 @@
             return "Bienvenido";
         });
         
-        Router::add('GET','/categorias', function () {
+        Router::add('GET','/principal', function () {
             return (new CategoriasController())->mostrarTodos();
         });
 
@@ -33,9 +33,10 @@
         });
 
 
-        /*Router::add('GET','/', function (){
+        Router::add('GET','/login', function (){
             return (new CategoriasController())->mostrarTodos();
         });
+        /*
         /*Router::add('GET','public/', function (){
             return (new ContactoController())->mostrarTodos();
         }); */

@@ -34,7 +34,6 @@
                 <input type="password" name="contrasena" placeholder="Contraseña">
                 <button type="submit" name="registro">Registrarse</button>
             </form>
-            <a href="<?= BASE_URL ?>registro_usuario" class="button">Ir a Categorías</a>
 
 </body>
 </html>

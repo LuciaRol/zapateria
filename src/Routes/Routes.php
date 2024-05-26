@@ -117,8 +117,17 @@
             }
         });
         
-        
-
+       
+        Router::add('POST', '/eliminar_producto_carrito', function () {
+            // Verificar si se ha enviado el formulario para eliminar un producto del carrito
+            if (isset($_POST['producto_key'])) {
+                // Obtener el ID del producto desde el formulario
+                $productoId = $_POST['producto_key'];
+                
+                // Llamar al método eliminarDelCarrito del controlador CarritoController
+                return (new CarritoController())->eliminarDelCarrito($productoId);
+            }
+        });
 
        /*  Router::add('GET','/Contacto/listar', function (){
             return (new ContactoController())->listar();

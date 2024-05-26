@@ -5,6 +5,7 @@
    use Controllers\UsuarioController;
    use Controllers\PedidosController;
    use Controllers\ProductosController;
+   use Controllers\CarritoController;
    use Lib\Router;
    use Controllers\ErrorController;
 
@@ -105,6 +106,17 @@
                 $categoriasController->registroCategoria($nombreCategoria);
             }
         });
+
+        Router::add('POST', '/agregar_al_carrito', function () {
+            // Verificar si se ha enviado el formulario para agregar un producto al carrito
+            if (isset($_POST['producto_id'])) {
+                // Obtener el ID del producto desde el formulario
+                $productoId = $_POST['producto_id'];
+                return (new CarritoController())->agregarAlCarrito($productoId);
+               
+            }
+        });
+        
         
 
 

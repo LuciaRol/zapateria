@@ -88,7 +88,7 @@ header .search_container input, header .login_container input{
 }
 
 header .search_container input:focus, header .login_container input:focus{
-	outline: 2px solid var(--secondary);
+	outline: 2px solid var(--contrast);
 	border-radius: 2px;
 }
 
@@ -109,3 +109,46 @@ header .login_btn:hover{
 	border: 1px solid gainsboro;
 	color: var(--text-title);
 }
+
+/* FOOTER */
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	border-top: 2px solid var(--primary-light);
+	padding: 10px 0;
+	margin-top: 10px;
+}
+
+/* INICIO - CARDS */
+.card-h2 {
+    text-align: center;
+    padding: 20px;
+}
+
+.card-container {
+    display: grid;
+    place-items: center;
+    /* height: 75vh; */
+}
+
+.card {
+    width: 300px;
+    margin-bottom: 20px;
+    border: 1px solid var(--primary-light);
+    border-radius: 5px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.categoria {
+    margin: 0;
+}
+
+.categoria p {
+    margin: 5px 0;
+}
+

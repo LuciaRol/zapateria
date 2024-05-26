@@ -69,6 +69,10 @@
             return "ERROR";
         });
 
+        Router::add('POST','/registro', function (){
+            return (new UsuarioController())->mostrarRegistro();
+        });
+
 
 
        /*  Router::add('GET','/Contacto/listar', function (){

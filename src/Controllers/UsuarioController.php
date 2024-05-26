@@ -146,6 +146,13 @@ class UsuarioController {
         // Renderizar la vista de usuario pasando las propiedades del usuario y el mensaje de error si existe
         $this->pagina->render("mostrarUsuario", $data);
     }
+
+    public function mostrarRegistro($error = null) {
+        // Obtener el email del usuario utilizando la función obtenerEmailUsuario
+        
+        // Renderizar la vista de usuario pasando las propiedades del usuario y el mensaje de error si existe
+        $this->pagina->render("mostrarRegistro");
+    }
     
 }
 

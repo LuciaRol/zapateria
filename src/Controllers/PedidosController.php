@@ -26,6 +26,7 @@ class PedidosController {
     }
 
     public function mostrarPedidos($emailRecordado = null) {
+        
         // Obtener todos los pedidos
         $pedidos = $this->PedidosService->obtenerPedidos();
     

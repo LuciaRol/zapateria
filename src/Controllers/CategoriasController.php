@@ -39,14 +39,9 @@ class CategoriasController {
             // Agregar la instancia de Categoria al array
             $categoriasModel[] = $categoriaModel;
         }
-    
-        // Verificar si la sesión está activa y obtener el correo electrónico
-        $emailSesion = isset($_SESSION['email']) ? $_SESSION['email'] : null;
-    
-        // Si no hay sesión activa, utilizar el correo electrónico recordado
-        if (!$emailSesion && $emailRecordado) {
-            $emailSesion = $emailRecordado;
-        }
+        $usuarioController = new UsuarioController();
+        // Obtener el email del usuario
+        $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
     
         // Devolver la renderización de la página con los objetos de categoría y el correo electrónico de la sesión
         return $this->pagina->render('mostrarPrincipal', ['categorias' => $categoriasModel, 'emailSesion' => $emailSesion]);

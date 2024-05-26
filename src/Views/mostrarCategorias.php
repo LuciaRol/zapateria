@@ -33,5 +33,12 @@
         </div>
     </div>
 
+    <!-- Display message if it exists -->
+    <?php if (!empty($mensaje)): ?>
+        <div class="message">
+            <p><?php echo htmlspecialchars($mensaje, ENT_QUOTES, 'UTF-8'); ?></p>
+        </div>
+    <?php endif; ?>
+
 </body>
 </html>

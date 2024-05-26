@@ -132,4 +132,12 @@ class Validacion {
         // Si la fecha no tiene el formato correcto o no es válida, devolvemos null
         return null;
     }
+
+      // Nueva función para sanear nombre de la categoría
+      public static function sanearCategoria($nombreCategoria): string {
+        // Aplicar trim para eliminar espacios en blanco al inicio y al final
+        $nombreCategoria = trim($nombreCategoria);
+        // Sanear el nombre de la categoría
+        return self::sanearString($nombreCategoria);
+    }
 }

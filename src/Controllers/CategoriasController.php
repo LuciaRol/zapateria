@@ -25,10 +25,11 @@ class CategoriasController {
         $this->usuariosService = new UsuariosService();
     }
 
-    public function mostrarTodos($emailRecordado = null) {
+    public function mostrarTodos($emailRecordado = null, $mensaje = '')
+    {
         // Obtener todas las categorías
         $categorias = $this->categoriasService->obtenerCategorias();
-    
+
         // Crear un array para almacenar los objetos de categoría
         $categoriasModel = [];
         foreach ($categorias as $categoria) {
@@ -39,16 +40,20 @@ class CategoriasController {
             // Agregar la instancia de Categoria al array
             $categoriasModel[] = $categoriaModel;
         }
+        
         $usuarioController = new UsuarioController();
         // Obtener el email del usuario
         $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
-    
-        // Devolver la renderización de la página con los objetos de categoría y el correo electrónico de la sesión
-        return $this->pagina->render('mostrarCategorias', ['categorias' => $categoriasModel, 'emailSesion' => $emailSesion]);
+
+        // Devolver la renderización de la página con los objetos de categoría, el correo electrónico de la sesión y el mensaje
+        return $this->pagina->render('mostrarCategorias', [
+            'categorias' => $categoriasModel, 
+            'emailSesion' => $emailSesion, 
+            'mensaje' => $mensaje
+        ]);
     }
-    
     public function registroCategoria($nombreCategoria) {
-        $mensaje = ''; // Inicializamos la variable de mensaje
+        $mensaje = 'Regístrate como admin para crear la categoría'; // Inicializamos la variable de mensaje
         
         $usuarioController = new UsuarioController();
         // Obtener el email del usuario
@@ -59,10 +64,16 @@ class CategoriasController {
             
             // Verifica si el usuario tiene permisos de administrador
             if ($email->getRol() === 'admin') {
-                // Después de verificar al usuario como administrador, guarda la nueva categoría si está presente en el formulario
-                if (isset($_POST['nueva_categoria'])) {
-                    $nombreCategoria = $_POST['nueva_categoria'];
+                $nombreCategoria = Validacion::sanearCategoria($nombreCategoria);
+                
+
+                if (empty($nombreCategoria)) {
+                    // Si el nombre de la categoría está vacío, asignar un mensaje de error
+                    $mensaje = "Debe proporcionar un nombre para la nueva categoría.";
+                } else {
+                    // Guardar la nueva categoría si no está vacía
                     $this->categoriasService->guardarCategoria($nombreCategoria);
+                    $mensaje = "Categoría creada exitosamente.";
                 }
             } else {
                 // Si el usuario no es administrador, asigna un mensaje indicando que no tiene permisos suficientes
@@ -70,11 +81,8 @@ class CategoriasController {
             }
         }
         
-        $this-> mostrarTodos($email);
+        $this-> mostrarTodos($email, $mensaje);
     }
-
-
-
 
 }
 

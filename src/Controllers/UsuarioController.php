@@ -68,13 +68,23 @@ class UsuarioController {
     }
 
     public function logout() {
-        session_start();
+        // Inicia la sesión si no ha sido iniciada ya
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        // Destruye la sesión
         session_destroy();
+    
+        // Elimina la cookie de email_recordado si existe
+        if (isset($_COOKIE['email_recordado'])) {
+            unset($_COOKIE['email_recordado']);
+            setcookie('email_recordado', '', time() - 3600, '/');
+        }
+    
+        // Redirige a mostrarTodos en CategoriasController
         $categoriasController = new CategoriasController();
-
         return $categoriasController->mostrarTodos();
     }
-
     private function sesion_usuario(): bool {
         // Inicia la sesión si no ha sido iniciada ya
         if (session_status() === PHP_SESSION_NONE) {

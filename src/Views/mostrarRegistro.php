@@ -15,7 +15,7 @@
         <!-- Campos del formulario para el registro de usuario -->
         <input type="text" name="nombre" placeholder="Nombre">
         <input type="text" name="apellidos" placeholder="Apellidos">
-        <input type="text" name="email" placeholder="Email">
+        <input type="email" name="email" placeholder="Email">
         <input type="password" name="contrasena" placeholder="Contraseña">
         <button type="submit" name="registro">Registrarse</button>
     </form>

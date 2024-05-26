@@ -27,6 +27,17 @@ class PedidosController {
 
     public function mostrarPedidos($emailRecordado = null) {
         
+        
+        $usuarioController = new UsuarioController();
+        // Obtener el email del usuario
+        $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
+
+        
+        // Si no hay email de sesión, redirigir a mostrarTodos en CategoriasController
+        if (!$emailSesion) {
+            $productosController = new ProductosController();
+            return $productosController->mostrarProductos();
+        }
         // Obtener todos los pedidos
         $pedidos = $this->PedidosService->obtenerPedidos();
     

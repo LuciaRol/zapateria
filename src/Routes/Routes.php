@@ -129,12 +129,11 @@
             }
         });
 
-       /*  Router::add('GET','/Contacto/listar', function (){
-            return (new ContactoController())->listar();
+        Router::add('GET','/carrito', function (){
+            return (new CarritoController())->mostrarCarrito();
         });
-        Router::add('GET','/Contacto/registro', function (){
-            return (new ContactoController())->registro();
-        }); */
+
+       
 
         Router::dispatch();
     }

@@ -8,7 +8,9 @@
 <body>
     <main>
         <h2>Lista de Productos</h2>
-        
+        <?php if (!empty($mensaje)): ?>
+            <p class="mensaje"><?php echo $mensaje; ?></p>
+        <?php endif; ?>
         <?php if (!empty($productos)): ?>
             <table class="productos-table">
                 <thead>
@@ -52,8 +54,6 @@
             <p>No hay productos disponibles.</p>
         <?php endif; ?>
 
-        <!-- Enlace para ver el carrito -->
-        <a href="<?= BASE_URL ?>agregar_al_carrito">Ver carrito</a>
     </main>
 </body>
 </html>

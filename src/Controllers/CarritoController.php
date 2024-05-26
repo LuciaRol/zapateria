@@ -46,27 +46,31 @@ class CarritoController
     {
         // Obtener el producto de la base de datos utilizando el ID
         $producto = $this->productosService->obtenerProductoPorId($productoId);
-    
-        // Verificar si el producto existe
-        if ($producto) {
-            // Obtener el email del usuario
-            $usuarioController = new UsuarioController();
-            $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
+        // Revisamos que el usuario está registrado
+        $usuarioController = new UsuarioController();
+        $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
             // Agregar el producto al carrito
             if ($usuarioController->sesion_usuario()) {
 
-                $_SESSION['carrito'][] = $producto;
-
-                // Guardar el carrito en una variable para pasarla a la vista
-                $productosEnCarrito = $_SESSION['carrito'];
-
+        // Verificar si el producto existe
+            if ($producto) {
+                // Obtener el email del usuario
                 
-                // Renderizar la página del carrito con los productos actualizados
-                return $this->mostrarCarrito($emailSesion);                
-            }
+                    $_SESSION['carrito'][] = $producto;
+
+                    // Guardar el carrito en una variable para pasarla a la vista
+                    $productosEnCarrito = $_SESSION['carrito'];
+
+                    
+                    // Renderizar la página del carrito con los productos actualizados
+                    return $this->mostrarCarrito($emailSesion);                
+                }
         } else {
-            // Si no se encontró el producto, puedes manejar el error de alguna manera (por ejemplo, mostrando un mensaje al usuario)
-            echo "El producto no existe";
+            // Si no se encontró el usuario, vuelve a la página principal
+            $mensaje = "Tienes que registrate para poder agregar productos";
+            $productosController = new ProductosController();
+            return $productosController->mostrarProductos($emailSesion, $mensaje);
+ ;
         }
     }
     public function eliminarDelCarrito($key, $emailRecordado = null)
@@ -88,54 +92,18 @@ class CarritoController
 
     public function mostrarCarrito($emailSesion = null)
     {
-        //  // Obtener el email del usuario
-        //  $usuarioController = new UsuarioController();
-        //  $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
-         
-        return $this->pagina->render('mostrarCarrito', ['emailSesion' => $emailSesion]);
+        $usuarioController = new UsuarioController();
+        if ($usuarioController->sesion_usuario()) {
+            $emailSesion = $usuarioController->obtenerEmailUsuario($emailSesion);
+            
+            return $this->pagina->render('mostrarCarrito', ['emailSesion' => $emailSesion]);
+        }
+        else{
+            $mensaje = "Tienes que registrarte para poder ver el carrito";
+            $productosController = new ProductosController();
+            return $productosController->mostrarProductos($emailSesion, $mensaje);
+        }
     }
 
 
-
-    // public function agregarAlCarrito($productoId){
-    
-    //     // Obtener el producto de la base de datos utilizando el ID
-    // $producto = $this->productosService->obtenerProductoPorId($productoId);
-
-    // // Verificar si se encontró el producto
-    // if ($producto) {
-    //     // Crear un modelo de carrito con los datos del producto
-    //     $productoEnCarrito = new ProductoEnCarrito(
-    //         $producto['id'],
-    //         $producto['categoria_id'],
-    //         $producto['nombre'],
-    //         $producto['descripcion'],
-    //         $producto['precio'],
-    //         $producto['stock'],
-    //         $producto['oferta'],
-    //         $producto['fecha'],
-    //         $producto['imagen']
-    //     );
-
-    //     // Agregar el producto al carrito
-    //     $this->agregarProductoAlCarrito($productoEnCarrito);
-
-        
-    //     // Guardar la instancia de ProductosController en la sesión
-        
-
-       
-    // } else {
-    //     // Si no se encontró el producto, puedes manejar el error de alguna manera (por ejemplo, mostrando un mensaje al usuario)
-    //     echo "El producto no existe";
-
-    // }
-    // }
-
-    // private function agregarProductoAlCarrito($productoEnCarrito) {
-        
-    //     array_push($this->productosEnCarrito, $productoEnCarrito);
-    //     // Llamar al método para mostrar los productos (asumo que esto renderizará la página de productos con el carrito actualizado)
-    //      $this->mostrarCarrito(null,$this->productosEnCarrito);
-    // }
 }

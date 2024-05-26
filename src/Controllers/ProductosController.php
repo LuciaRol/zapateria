@@ -26,7 +26,7 @@ class ProductosController
         
     }
 
-    public function mostrarProductos($emailRecordado = null)
+    public function mostrarProductos($emailRecordado = null, $mensaje = null)
     {
         // Obtener todos los productos
         $productos = $this->productosService->obtenerProductos();
@@ -55,7 +55,7 @@ class ProductosController
         $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
 
         // Devolver la renderización de la página con los objetos de producto y el correo electrónico de la sesión
-        return $this->pagina->render('mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion]);
+        return $this->pagina->render('mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'mensaje' => $mensaje]);
     }
 
     public function agregarAlCarrito($productoId){

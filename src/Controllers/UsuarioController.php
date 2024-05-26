@@ -118,8 +118,9 @@ class UsuarioController {
     
         // Si no hay email de sesión, redirigir a mostrarTodos en CategoriasController
         if (!$emailSesion) {
+            $mensaje = "Tienes que registrarte para poder ver tu usuario";
             $productosController = new ProductosController();
-            return $productosController->mostrarProductos();
+            return $productosController->mostrarProductos($emailSesion, $mensaje);
         }
     
         // Obtén los datos del usuario autenticado
@@ -207,23 +208,5 @@ class UsuarioController {
     }
     
 }
-
-    // public function validarSanear($nombre, $apellidos, $email, $rol) {
-    //     // Validar los valores
-    //     $errores = Validacion::validarDatosUsuario($nombre, $apellidos, $email, $rol);
-    
-    //     // Si hay errores, asignar el mensaje de error a una variable
-    //     if (!empty($errores)) {
-    //         $this->mostrarTodos(); 
-    //         return false; // Indicar que hubo errores
-    //     }
-    
-    //     // Saneamiento de los campos
-    //     $usuarioSaneado = Validacion::sanearCamposUsuario( $nombre, $apellidos, $email, $rol);
-       
-        
-    //     // Devolver los campos saneados
-    //     return $usuarioSaneado;
-    // }
 
 

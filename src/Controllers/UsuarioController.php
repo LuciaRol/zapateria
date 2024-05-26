@@ -156,37 +156,30 @@ class UsuarioController {
 
     public function actualizarUsuario($nombre, $apellidos, $email, $rol) {
         // Validar y sanear los datos
-        // $usuarioValidado = $this->validarSaneaUsuario($nombre, $apellidos, $email, $rol);
+        $usuarioValidado = $this->validarSaneaUsuario($nombre, $apellidos, $email, $rol);
         
-        // // Check if the user data is valid
-        // if (!$usuarioValidado) {
-        //     // Handle invalid data, perhaps show an error message
-        //     $error_message = "Error: Datos de usuario no válidos.";
-        //     $this->mostrarUsuario($error_message);
-        //     return;
-        // }
+        // Check if the user data is valid
+        if (!$usuarioValidado) {
+            // Handle invalid data, perhaps show an error message
+            $error_message = "Error: Datos de usuario no válidos.";
+            $this->mostrarUsuario($error_message);
+            return;
+        }
     
-        // // Continuar con la actualización del usuario utilizando los campos saneados
-        // $resultado = $this->usuariosService->actualizarUsuario(
-        //     $usuarioValidado['nombre'],
-        //     $usuarioValidado['apellidos'],
-        //     $usuarioValidado['email'],
-        //     $usuarioValidado['rol']
-        // );
-
+        // Continuar con la actualización del usuario utilizando los campos saneados
         $resultado = $this->usuariosService->actualizarUsuario(
-                 $nombre,
-                 $apellidos,
-                 $email,
-                 $rol
-            );
+            $usuarioValidado['nombre'],
+            $usuarioValidado['apellidos'],
+            $usuarioValidado['email'],
+            $usuarioValidado['rol']
+        );
     
         if ($resultado === null) {
             // Redirigir a mostrar usuario si la actualización es exitosa
             $this->mostrarUsuario();
         } else {
             // Manejo de error si ocurre algún problema al actualizar el usuario
-            $this->mostrarUsuario();
+            $this->mostrarUsuario($resultado);
         }
     }
     

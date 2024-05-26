@@ -9,7 +9,7 @@
             <a class="nav_link" href="<?= BASE_URL ?>">Inicio</a>
             <a class="nav_link" href="<?= BASE_URL ?>pedidos">Pedidos</a>
             <a class="nav_link" href="<?= BASE_URL ?>usuario">Usuario</a>
-            <a class="nav_link" href="<?= BASE_URL ?>?controller=Entrada&action=mostrarEntradas">Entradas</a>
+            <a class="nav_link" href="<?= BASE_URL ?>producto">Producto</a>
             <a class="nav_link" href="">Contacto</a>
         </nav>
     </div>

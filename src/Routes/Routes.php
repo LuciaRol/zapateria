@@ -4,6 +4,7 @@
    use Controllers\CategoriasController;
    use Controllers\UsuarioController;
    use Controllers\PedidosController;
+   use Controllers\ProductosController;
    use Lib\Router;
    use Controllers\ErrorController;
 
@@ -59,7 +60,9 @@
         Router::add('GET','/usuario', function () {
             return (new UsuarioController())->mostrarUsuario();
         });
-
+        Router::add('GET','/producto', function () {
+            return (new ProductosController())->mostrarProductos();
+        });
 
         Router::add('GET','/error/', function (){
             /* return (new ErrorController())->show_error404(); */

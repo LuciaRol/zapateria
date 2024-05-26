@@ -1,4 +1,6 @@
-<h3 class="sidebar_title">¡Regístrate ahora!</h3>
+<link rel="stylesheet" href="public/css/styles.css">
+<main>
+    <h2 class="sidebar_title">¡Regístrate ahora!</h2>
     <?php
     // Verificar si hay errores de registro y mostrar el mensaje
     if (isset($error_registro) && is_array($error_registro)) {
@@ -9,7 +11,7 @@
         echo "</ul>";
     }
     ?>
-    <form action="<?= BASE_URL ?>registro_usuario" method="POST">
+    <form class="registro-form" action="<?= BASE_URL ?>registro_usuario" method="POST">
         <!-- Campos del formulario para el registro de usuario -->
         <input type="text" name="nombre" placeholder="Nombre">
         <input type="text" name="apellidos" placeholder="Apellidos">
@@ -17,3 +19,4 @@
         <input type="password" name="contrasena" placeholder="Contraseña">
         <button type="submit" name="registro">Registrarse</button>
     </form>
+</main>

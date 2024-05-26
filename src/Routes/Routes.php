@@ -69,7 +69,7 @@
             return "ERROR";
         });
 
-        Router::add('POST','/registro', function (){
+        Router::add('GET','/registro', function (){
             return (new UsuarioController())->mostrarRegistro();
         });
 

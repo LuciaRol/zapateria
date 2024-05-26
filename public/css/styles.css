@@ -210,7 +210,6 @@ h2 {
 }
 
 /* PRODUCTOS */
-/* PRODUCTOS */
 
 .productos-table {
     width: 100%;
@@ -234,6 +233,51 @@ h2 {
     background-color: var(--primary);
     color: var(--text);
 }
+
+
+
+/* REGISTRO */
+
+.registro-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid var(--primary-light);
+    border-radius: 5px;
+    background-color: var(--primary);
+}
+
+.registro-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-title);
+}
+
+.registro-form input[type="text"],
+.registro-form input[type="password"],
+.registro-form button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid var(--contrast);
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.registro-form button {
+    background-color: var(--contrast);
+    color: var(--text-title);
+    cursor: pointer;
+	border: none;
+}
+
+.registro-form button:hover {
+    background-color: var(--contrat-hover);
+    border: 1px solid var(--primary-light);
+	border:none;
+}
+
+
 
 
 

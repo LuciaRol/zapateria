@@ -9,11 +9,11 @@
 
   class Routes{
     public static function index(){
-        Router::add('GET','/', function (){
+        /*Router::add('GET','/', function (){
             return "Bienvenido";
-        });
+        });*/
         
-        Router::add('GET','/principal', function () {
+        Router::add('GET','/', function () {
             return (new CategoriasController())->mostrarTodos();
         });
 
@@ -55,6 +55,10 @@
         Router::add('GET','/pedidos', function (){
             return (new PedidosController())->mostrarPedidos();
         }); 
+        
+        Router::add('GET','/usuario', function () {
+            return (new UsuarioController())->mostrarUsuario();
+        });
 
 
         Router::add('GET','/error/', function (){

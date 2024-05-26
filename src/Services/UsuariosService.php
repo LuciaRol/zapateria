@@ -25,7 +25,8 @@
             }
         }
 
-
-        
+        public function obtenerUsuarioPorEmail(string $email): ?Usuarios {
+            return $this->userRepository->findByEmail($email);
+        }        
         
     }

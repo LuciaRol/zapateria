@@ -74,6 +74,48 @@ class UsuarioController {
 
         return $categoriasController->mostrarTodos();
     }
+
+    private function sesion_usuario(): bool {
+        // Inicia la sesión si no ha sido iniciada ya
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        // Verifica si el email del usuario está presente en la sesión
+        return isset($_SESSION['email']);
+    }
+
+
+    public function mostrarUsuario($error = null) {
+        // Verifica si el usuario está autenticado usando la función sesion_usuario()
+        if (!$this->sesion_usuario()) {
+            return; // Aquí puedes redirigir a una página de login o mostrar un mensaje de error
+        }
+    
+        // Obtén los datos del usuario autenticado
+        $usuario = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
+        
+        // Verificar si se encontró el usuario
+        if (!$usuario) {
+            return $this->pagina->render('error', ['message' => 'Usuario no encontrado.']);
+        }
+    
+        // Obtén todas las propiedades del usuario
+        $nombre = $usuario->getNombre();
+        $apellidos = $usuario->getApellidos();
+        $email = $usuario->getEmail();
+        $rol = $usuario->getRol();
+    
+        // Preparar los datos para renderizar la vista de usuario
+        $data = compact('nombre', 'apellidos', 'email', 'rol');
+    
+        // Agregar el mensaje de error a los datos si está presente
+        if ($error !== null) {
+            $data['error_message'] = $error;
+        }
+    
+        // Renderizar la vista de usuario pasando las propiedades del usuario y el mensaje de error si existe
+        $this->pagina->render("mostrarUsuario", $data);
+    }
     
 }
 

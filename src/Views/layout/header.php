@@ -6,7 +6,7 @@
             <h1 class="principal_title">Blog</h1>
         </div>
         <nav class="nav_container">
-            <a class="nav_link" href="<?= BASE_URL ?>principal">Inicio</a>
+            <a class="nav_link" href="<?= BASE_URL ?>">Inicio</a>
             <a class="nav_link" href="<?= BASE_URL ?>pedidos">Pedidos</a>
             <a class="nav_link" href="<?= BASE_URL ?>usuario">Usuario</a>
             <a class="nav_link" href="<?= BASE_URL ?>?controller=Entrada&action=mostrarEntradas">Entradas</a>

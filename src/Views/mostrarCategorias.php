@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Categorías</title>
+    <link rel="stylesheet" type="text/css" href="public/css/styles.css">
+</head>
+<body>
+    <h2 class="card-h2">Categorías</h2>
+    <div class="card-container">
+        <?php foreach ($categorias as $categoria): ?>
+            <div class="card">
+                <div class="card-body">
+                    <article class="categoria">
+                        <p>ID: <?php echo $categoria->getId(); ?></p>
+                        <p>Nombre: <?php echo $categoria->getNombre(); ?></p>
+                    </article>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <!-- Formulario para crear una nueva categoría -->
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-h2">Crear Nueva Categoría</h2>
+            <form action="<?= BASE_URL ?>registro_categoria" method="POST"> 
+                <label for="nueva_categoria">Nombre:</label>
+                <input type="text" id="nueva_categoria" name="nueva_categoria" required><br><br>
+                <input type="submit" value="Crear Categoría">
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

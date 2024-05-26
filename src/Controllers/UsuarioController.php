@@ -86,7 +86,7 @@ class UsuarioController {
 
         return $productosController->mostrarProductos();
     }
-    private function sesion_usuario(): bool {
+    public function sesion_usuario(): bool {
         // Inicia la sesión si no ha sido iniciada ya
         if (session_status() === PHP_SESSION_NONE) {
             session_start();

@@ -92,7 +92,19 @@
             }
         });
         
-        
+        Router::add('POST', '/registro_categoria', function () {
+            // Verificar si se ha enviado el formulario para registrar una nueva categoría
+            if (isset($_POST['nueva_categoria'])) {
+                // Obtener el nombre de la nueva categoría desde el formulario
+                $nombreCategoria = $_POST['nueva_categoria'];
+                
+                // Crear una instancia del controlador de categorías
+                $categoriasController = new CategoriasController();
+                
+                // Llamar al método para registrar una nueva categoría del controlador de categorías
+                $categoriasController->registroCategoria($nombreCategoria);
+            }
+        });
         
 
 

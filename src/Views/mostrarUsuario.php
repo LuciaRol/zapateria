@@ -28,7 +28,7 @@
             <label for="new_rol">Nuevo Rol:</label>
             <select id="new_rol" name="new_rol">
                 <option value="admin">Admin</option>
-                <option value="usuario">Usuario</option>
+                <option value="usur">Usuario</option>
             </select>
             <br>
             <input type="submit" value="Guardar Cambios">

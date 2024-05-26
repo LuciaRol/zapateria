@@ -152,3 +152,89 @@ footer {
     margin: 5px 0;
 }
 
+/* PEDIDOS */
+.pedido-table-h2{
+    text-align: center;
+	padding: 20px;
+}
+
+.pedido-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.pedido-table th,
+.pedido-table td {
+    border: 1px solid var(--contrast);
+    padding: 8px;
+    text-align: left;
+}
+
+.pedido-table th {
+    background-color: var(--contrast);
+    color: var(--text-title);
+}
+
+.pedido-table td {
+    background-color: var(--primary);
+    color: var(--text);
+}
+
+/* USUARIO */
+
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    border: 1px solid var(--primary-light);
+    border-radius: 5px;
+    width: 300px; 
+    margin: 0 auto; 
+}
+
+.profile-info p {
+    margin: 10px 0;
+}
+
+.error-message {
+    color: red;
+    margin-top: 20px;
+    text-align: center; 
+}
+
+h2 {
+    text-align: center; 
+	padding: 20px;
+}
+
+/* PRODUCTOS */
+/* PRODUCTOS */
+
+.productos-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.productos-table th,
+.productos-table td {
+    border: 1px solid var(--primary-light);
+    padding: 8px;
+    text-align: left;
+}
+
+.productos-table th {
+    background-color: var(--primary-light);
+    color: var(--text-title);
+}
+
+.productos-table td {
+    background-color: var(--primary);
+    color: var(--text);
+}
+
+
+
+

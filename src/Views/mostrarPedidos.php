@@ -1,22 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Pedidos</title>
-    <link rel="stylesheet" href="path/to/your/styles.css">
-</head>
+
+<link rel="stylesheet" href="public/css/styles.css">
 <body>
     <main>
-    <h2>Lista de Pedidos</h2>
-        <?php if (isset($emailSesion)): ?>
-            <p>Bienvenido, <?= htmlspecialchars($emailSesion); ?></p>
-            <form action="<?= BASE_URL ?>logout" method="POST">
-                <button type="submit">Cerrar sesión</button>
-            </form>
-        <?php endif; ?>
+        <h2 class="pedido-table-h2">Lista de Pedidos</h2>
+        
         <?php if (!empty($pedidos)): ?>
-            <table>
+            <table class="pedido-table">
                 <thead>
                     <tr>
                         <th>ID</th>

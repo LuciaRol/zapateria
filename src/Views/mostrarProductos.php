@@ -1,30 +1,42 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Productos</title>
-</head>
+<link rel="stylesheet" href="public/css/styles.css">
 <body>
-    <h1>Lista de Productos</h1>
-    <?php if (!empty($productos)): ?>
-        <ul>
-            <?php foreach ($productos as $producto): ?>
-                <li>
-                    <strong>ID:</strong> <?php echo $producto->getId(); ?><br>
-                    <strong>Categoría ID:</strong> <?php echo $producto->getCategoriaId(); ?><br>
-                    <strong>Nombre:</strong> <?php echo $producto->getNombre(); ?><br>
-                    <strong>Descripción:</strong> <?php echo $producto->getDescripcion() ?? 'Sin descripción'; ?><br>
-                    <strong>Precio:</strong> <?php echo $producto->getPrecio(); ?><br>
-                    <strong>Stock:</strong> <?php echo $producto->getStock(); ?><br>
-                    <strong>Oferta:</strong> <?php echo $producto->getOferta() ?? 'No'; ?><br>
-                    <strong>Fecha:</strong> <?php echo $producto->getFecha(); ?><br>
-                    <strong>Imagen:</strong> <img src="<?php echo $producto->getImagen() ?? 'placeholder.jpg'; ?>" alt="Imagen del producto"><br>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    <?php else: ?>
-        <p>No hay productos disponibles.</p>
-    <?php endif; ?>
+    <main>
+        <h2>Lista de Productos</h2>
+        
+        <?php if (!empty($productos)): ?>
+            <table class="productos-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Categoría ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Oferta</th>
+                        <th>Fecha</th>
+                        <th>Imagen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($productos as $producto): ?>
+                        <tr>
+                            <td><?php echo $producto->getId(); ?></td>
+                            <td><?php echo $producto->getCategoriaId(); ?></td>
+                            <td><?php echo $producto->getNombre(); ?></td>
+                            <td><?php echo $producto->getDescripcion() ?? 'Sin descripción'; ?></td>
+                            <td><?php echo $producto->getPrecio(); ?></td>
+                            <td><?php echo $producto->getStock(); ?></td>
+                            <td><?php echo $producto->getOferta() ?? 'No'; ?></td>
+                            <td><?php echo $producto->getFecha(); ?></td>
+                            <td><img src="<?php echo $producto->getImagen() ?? 'placeholder.jpg'; ?>" alt="Imagen del producto"></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p>No hay productos disponibles.</p>
+        <?php endif; ?>
+    </main>
 </body>
 </html>

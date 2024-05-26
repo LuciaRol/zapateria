@@ -64,7 +64,7 @@
             return (new ProductosController())->mostrarProductos();
         });
 
-        Router::add('GET','/error/', function (){
+        Router::add('GET','/error', function (){
             /* return (new ErrorController())->show_error404(); */
             return "ERROR";
         });

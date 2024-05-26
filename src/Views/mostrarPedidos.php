@@ -7,16 +7,14 @@
     <link rel="stylesheet" href="path/to/your/styles.css">
 </head>
 <body>
-    <header>
-        <h1>Lista de Pedidos</h1>
+    <main>
+    <h2>Lista de Pedidos</h2>
         <?php if (isset($emailSesion)): ?>
             <p>Bienvenido, <?= htmlspecialchars($emailSesion); ?></p>
             <form action="<?= BASE_URL ?>logout" method="POST">
                 <button type="submit">Cerrar sesión</button>
             </form>
         <?php endif; ?>
-    </header>
-    <main>
         <?php if (!empty($pedidos)): ?>
             <table>
                 <thead>

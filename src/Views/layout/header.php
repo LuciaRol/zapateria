@@ -1,15 +1,15 @@
-
+<link rel="stylesheet" href="public/css/styles.css">
 <header class="header">
     <div class="header_first_div">
         <div class="header_principal">
-            <div ><img class="principal_logo" src="Assets/img/nebulosa.png" alt=""></div>
-            <h1 class="principal_title">Blog</h1>
+            <div ><img class="principal_logo" src="public/img/logo.png" alt=""></div>
+            <h1 class="principal_title">Zapatería El gato con botas</h1>
         </div>
         <nav class="nav_container">
             <a class="nav_link" href="<?= BASE_URL ?>">Inicio</a>
             <a class="nav_link" href="<?= BASE_URL ?>pedidos">Pedidos</a>
             <a class="nav_link" href="<?= BASE_URL ?>usuario">Usuario</a>
-            <a class="nav_link" href="<?= BASE_URL ?>producto">Producto</a>
+            <a class="nav_link" href="<?= BASE_URL ?>producto">Registro</a>
             <a class="nav_link" href="">Contacto</a>
         </nav>
     </div>
@@ -17,9 +17,8 @@
     <div class="header_second_div">
         <div class="search_container">
             <form action="<?= BASE_URL ?>?controller=Blog&action=buscar" method="POST">
-                <label class="search_label" for="buscar">Buscar</label>
                 <input class="search_input" type="text" name="q" placeholder="Busca">
-                <button type="submit" class="search_button">Buscar</button>
+                <button type="submit" class="search_button login_btn">Buscar</button>
             </form>
             
         </div>
@@ -28,7 +27,7 @@
             <?php if (isset($_SESSION['email'])): ?>
                 <p>Hola, <?= htmlspecialchars($_SESSION['email']); ?></p>
                 <form action="<?= BASE_URL ?>logout" method="POST">
-                    <button type="submit" class="logout_button">Cerrar sesión</button>
+                    <button type="submit" class="logout_button login_btn">Cerrar sesión</button>
                 </form>
             <?php else: ?>
                 <form action="<?= BASE_URL ?>login" method="POST">

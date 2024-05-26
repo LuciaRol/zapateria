@@ -153,6 +153,64 @@ class UsuarioController {
         // Renderizar la vista de usuario pasando las propiedades del usuario y el mensaje de error si existe
         $this->pagina->render("mostrarRegistro");
     }
+
+    public function actualizarUsuario($nombre, $apellidos, $email, $rol) {
+        // Validar y sanear los datos
+        // $usuarioValidado = $this->validarSaneaUsuario($nombre, $apellidos, $email, $rol);
+        
+        // // Check if the user data is valid
+        // if (!$usuarioValidado) {
+        //     // Handle invalid data, perhaps show an error message
+        //     $error_message = "Error: Datos de usuario no válidos.";
+        //     $this->mostrarUsuario($error_message);
+        //     return;
+        // }
+    
+        // // Continuar con la actualización del usuario utilizando los campos saneados
+        // $resultado = $this->usuariosService->actualizarUsuario(
+        //     $usuarioValidado['nombre'],
+        //     $usuarioValidado['apellidos'],
+        //     $usuarioValidado['email'],
+        //     $usuarioValidado['rol']
+        // );
+
+        $resultado = $this->usuariosService->actualizarUsuario(
+                 $nombre,
+                 $apellidos,
+                 $email,
+                 $rol
+            );
+    
+        if ($resultado === null) {
+            // Redirigir a mostrar usuario si la actualización es exitosa
+            $this->mostrarUsuario();
+        } else {
+            // Manejo de error si ocurre algún problema al actualizar el usuario
+            $this->mostrarUsuario();
+        }
+    }
+    
+    public function validarSaneaUsuario( $nombre, $apellidos, $email, $rol) {
+        // Validar los valores
+        $errores = Validacion::validarDatosUsuario($nombre, $apellidos, $email, $rol);
+    
+        // Si hay errores, asignar el mensaje de error a una variable
+        if (!empty($errores)) {
+            $this->mostrarUsuario($errores);
+            // Renderiza la vista de usuario pasando las propiedades del usuario
+            
+
+            return false; // Indicar que hubo errores
+        }
+    
+        // Saneamiento de los campos
+        $usuarioSaneado = Validacion::sanearCamposUsuario($nombre, $apellidos, $email, $rol);
+        
+        // Asignar los valores saneados de vuelta a las variables originales
+        
+        // Devolver los campos saneados
+        return $usuarioSaneado;
+    }
     
 }
 
@@ -167,7 +225,7 @@ class UsuarioController {
     //     }
     
     //     // Saneamiento de los campos
-    //     $usuarioSaneado = Validacion::sanearCamposUsuario($username, $nombre, $apellidos, $email, $rol);
+    //     $usuarioSaneado = Validacion::sanearCamposUsuario( $nombre, $apellidos, $email, $rol);
        
         
     //     // Devolver los campos saneados

@@ -63,6 +63,21 @@
             }
         }
 
+        public function actualizarUsuario(string $nombre, string $apellidos, string $email, string $nuevoRol): ?string {
+            try {
+                $this->sql = $this->conexion->prepareSQL("UPDATE usuarios SET nombre = :nombre, apellidos = :apellidos, rol = :rol WHERE email = :email");
+                $this->sql->bindValue(":nombre", $nombre, PDO::PARAM_STR);
+                $this->sql->bindValue(":apellidos", $apellidos, PDO::PARAM_STR);
+                $this->sql->bindValue(":email", $email, PDO::PARAM_STR);
+                $this->sql->bindValue(":rol", $nuevoRol, PDO::PARAM_STR);
+                $this->sql->execute();
+                $this->sql->closeCursor();
+                return null;
+            } catch (PDOException $e) {
+                return $e->getMessage();
+            }
+        }
+
        
         
     }

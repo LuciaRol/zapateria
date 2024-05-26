@@ -73,6 +73,24 @@
             return (new UsuarioController())->mostrarRegistro();
         });
 
+        Router::add('POST', '/edita_perfil', function () {
+            // Check if the form for updating the user profile has been submitted
+            if (isset($_POST['new_nombre']) && isset($_POST['new_apellidos']) && isset($_POST['new_rol']) && isset($_POST['new_email'])) {
+                // Get the data from the form
+                $nombre = $_POST['new_nombre'];
+                $apellidos = $_POST['new_apellidos'];
+                $email = $_POST['new_email'];
+                $rol = $_POST['new_rol'];
+                
+                // Create an instance of the UsuarioController
+                $usuariosController = new UsuarioController();
+                // Call the actualizarUsuario method of the UsuarioController with the form data
+                $usuariosController->actualizarUsuario($nombre, $apellidos, $email, $rol);
+            }
+        });
+        
+        
+        
 
 
        /*  Router::add('GET','/Contacto/listar', function (){

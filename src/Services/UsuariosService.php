@@ -29,4 +29,8 @@
             return $this->userRepository->findByEmail($email);
         }        
         
+        public function actualizarUsuario(string $nombre, string $apellidos, string $email, string $nuevoRol): ?string {
+            return $this->userRepository->actualizarUsuario($nombre, $apellidos, $email, $nuevoRol);
+        }
+
     }

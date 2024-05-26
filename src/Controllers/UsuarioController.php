@@ -88,7 +88,10 @@ class UsuarioController {
     public function mostrarUsuario($error = null) {
         // Verifica si el usuario está autenticado usando la función sesion_usuario()
         if (!$this->sesion_usuario()) {
-            return; // Aquí puedes redirigir a una página de login o mostrar un mensaje de error
+            $categoriasController = new CategoriasController();
+            return $categoriasController->mostrarTodos();
+
+           
         }
     
         // Obtén los datos del usuario autenticado

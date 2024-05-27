@@ -6,7 +6,8 @@ use Services\PedidosService;
 use Services\ProductosService;
 use Lib\Pages;
 use Services\UsuariosService;
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class CarritoController
 {
@@ -147,11 +148,11 @@ class CarritoController
                         foreach ($cantidad_productos as $producto_id => $unidades) {
                             $guardar_productos_pedido = $this->pedidosService->guardarProductosPedido($pedido_id, $producto_id, $unidades);
                         }
-                        
 
-                        // falta enviar el email
-                        
-                         // Vaciar el carrito después de realizar la compra
+                        // Error al conectar enviar el mail por la seguridad de google
+                        //$this->enviarEmailAlUsuario($emailSesion, $pedido_id);
+
+                        // Vaciar el carrito después de realizar la compra
                          unset($_SESSION['carrito']);
                         
 
@@ -161,9 +162,48 @@ class CarritoController
                     }
                     else {
                         return $this-> mostrarCarrito($emailSesion);
-                        
-                        
-                }
+                    }
     }    
+}
+
+
+function enviarEmailAlUsuario($email, $pedido_id) {
+    $asunto = "Confirmación de Pedido";
+    $mensaje = "<html>
+    <head>
+        <title>Confirmación de Pedido</title>
+    </head>
+    <body>
+        <h1>Gracias por tu compra</h1>
+        <p>Tu pedido ha sido enviado con éxito. El número de tu pedido es <strong>{$pedido_id}</strong>.</p>
+    </body>
+    </html>";
+
+    $mail = new PHPMailer(true);
+    try {
+        //Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'luciarodriguezaplicaciones@gmail.com';
+        $mail->Password = 'HomerSimpson';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        //Recipients
+        $mail->setFrom('luciarodriguezaplicaciones@gmail.com', 'Zapateria');
+        $mail->addAddress($email);
+
+        //Content
+        $mail->isHTML(true);
+        $mail->Subject = $asunto;
+        $mail->Body    = $mensaje;
+
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        return false;
+    }
 }
 }

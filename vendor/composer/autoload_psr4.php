@@ -14,6 +14,7 @@ return array(
     'Routes\\' => array($baseDir . '/src/Routes'),
     'Repositories\\' => array($baseDir . '/src/Repositories'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
+    'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Models\\' => array($baseDir . '/src/Models'),
     'Lucia\\zapateria\\' => array($baseDir . '/src'),
     'Lib\\' => array($baseDir . '/src/Lib'),

@@ -53,7 +53,38 @@
         <?php else: ?>
             <p>No hay productos disponibles.</p>
         <?php endif; ?>
+    
+        <div class="card">
+        <div class="card-body">
+            <h2 class="card-h2">Crear Nuevo Producto</h2>
+            <form action="<?= BASE_URL ?>nuevo_producto" method="POST"> 
+                <label for="nuevo_producto">Nombre del Producto:</label><br>
+                <input type="text" id="nuevo_producto" name="nuevo_producto" required><br><br> 
+                <label for="categoria">Categoría:</label><br>
+                <select id="categoria" name="categoria" required>
+                    <?php foreach ($categorias as $categoria): ?>
+                        <option value="<?php echo htmlspecialchars($categoria->getId(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($categoria->getNombre(), ENT_QUOTES, 'UTF-8'); ?></option>
+                    <?php endforeach; ?>
+                </select><br><br>
+                <label for="descripcion">Descripción:</label><br>
+                <textarea id="descripcion" name="descripcion" rows="4" cols="50"></textarea><br><br>
 
+                <label for="precio">Precio:</label><br>
+                <input type="number" id="precio" name="precio" step="0.01" required><br><br>
+
+                <label for="stock">Stock:</label><br>
+                <input type="number" id="stock" name="stock" required><br><br>
+
+                <label for="oferta">Oferta (opcional):</label><br>
+                <input type="text" id="oferta" name="oferta"><br><br>
+
+                <label for="fecha">Fecha:</label><br>
+                <input type="date" id="fecha" name="fecha" required><br><br>
+
+                <input type="submit" value="Crear Producto"> <!-- Cambiado el texto del botón para reflejar que se está creando un producto -->
+            </form>
+        </div>
+    </div>
     </main>
 </body>
 </html>

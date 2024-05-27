@@ -133,6 +133,23 @@
             return (new CarritoController())->mostrarCarrito();
         });
 
+        Router::add('POST', '/nuevo_producto', function () {
+            // Verificar si se ha enviado el formulario para crear un nuevo producto
+            if (isset($_POST['nuevo_producto'], $_POST['descripcion'], $_POST['precio'], $_POST['stock'], $_POST['oferta'], $_POST['fecha'], $_POST['categoria'])) {
+                // Obtener la información del formulario
+                $nombreProducto = $_POST['nuevo_producto'];
+                $descripcion = $_POST['descripcion'];
+                $precio = $_POST['precio'];
+                $stock = $_POST['stock'];
+                $oferta = $_POST['oferta'];
+                $fecha = $_POST['fecha'];
+                $categoria_id = $_POST['categoria'];
+                
+                // Llamar a la función para registrar el nuevo producto
+                return (new ProductosController())->registroProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha);
+            }
+        });
+
         Router::add('POST', '/comprar_carrito', function () {
             // Verificar si se ha enviado el formulario para comprar el carrito
             if (isset($_POST['provincia'], $_POST['localidad'], $_POST['direccion'])) {

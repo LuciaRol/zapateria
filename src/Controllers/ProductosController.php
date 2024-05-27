@@ -22,7 +22,7 @@ class ProductosController
         $this->productosService = new ProductosService();
         // Crea una instancia del servicio de usuarios
         $this->usuariosService = new UsuariosService();
-
+        
         
     }
 
@@ -53,10 +53,51 @@ class ProductosController
         // Obtener el email del usuario
         $usuarioController = new UsuarioController();
         $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
-
+        $categoriasController = new CategoriasController();
+        $categorias = $categoriasController->todasCategorias();
         // Devolver la renderización de la página con los objetos de producto y el correo electrónico de la sesión
-        return $this->pagina->render('mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'mensaje' => $mensaje]);
+        return $this->pagina->render('mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'mensaje' => $mensaje, 'categorias' => $categorias]);
     }
+
+    public function registroProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha) {
+        $mensaje = 'Regístrate como admin para crear un producto'; // Inicializamos la variable de mensaje
+        
+        $usuarioController = new UsuarioController();
+        // Verifica si el usuario está autenticado
+        if ($usuarioController->sesion_usuario()) {
+            // Obtén el usuario actual
+            $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
+            
+            // Verifica si el usuario tiene permisos de administrador
+            if ($email->getRol() === 'admin') {
+                // Sanea los datos del producto
+                // $categoria_id = Validacion::sanearEntero($categoria_id);
+                // $nombreProducto = Validacion::sanearTexto($nombreProducto);
+                // $descripcion = Validacion::sanearTexto($descripcion);
+                // $precio = Validacion::sanearFlotante($precio);
+                // $stock = Validacion::sanearEntero($stock);
+                // $oferta = Validacion::sanearTexto($oferta);
+                // $fecha = Validacion::sanearFecha($fecha);
+    
+                // Validar campos obligatorios
+                if (empty($nombreProducto) || empty($categoria_id) || empty($precio) || empty($stock) || empty($fecha)) {
+                    $mensaje = "Debe proporcionar todos los campos obligatorios.";
+                } else {
+                    // Guardar el nuevo producto
+                    $imagen = "";
+                    $this->productosService->guardarProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen);
+                    $mensaje = "Producto creado exitosamente.";
+                }
+            } else {
+                // Si el usuario no es administrador, asigna un mensaje indicando que no tiene permisos suficientes
+                $mensaje = "No tienes permisos de administrador para registrar nuevos productos.";
+            }
+        }
+    
+        $this->mostrarProductos($email, $mensaje);
+    }
+    
+
 
     public function agregarAlCarrito($productoId){
     

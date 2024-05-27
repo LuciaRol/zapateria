@@ -28,16 +28,26 @@
             return $productoCommit;
         }
         
-        public function guardarproducto(string $nombreproducto): bool {
+        public function guardarProducto(int $categoria_id, string $nombre, ?string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha, ?string $imagen): bool {
             try {
-                $this->sql = $this->conexion->prepareSQL("INSERT INTO productos (nombre) VALUES (:nombre)");
-                $this->sql->bindParam(':nombre', $nombreproducto, PDO::PARAM_STR);
+                $this->sql = $this->conexion->prepareSQL("INSERT INTO productos (categoria_id, nombre, descripcion, precio, stock, oferta, fecha, imagen) 
+                                                        VALUES (:categoria_id, :nombre, :descripcion, :precio, :stock, :oferta, :fecha, :imagen)");
+                $this->sql->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
+                $this->sql->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+                $this->sql->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
+                $this->sql->bindParam(':precio', $precio, PDO::PARAM_STR);
+                $this->sql->bindParam(':stock', $stock, PDO::PARAM_INT);
+                $this->sql->bindParam(':oferta', $oferta, PDO::PARAM_STR);
+                $this->sql->bindParam(':fecha', $fecha, PDO::PARAM_STR);
+                $this->sql->bindParam(':imagen', $imagen, PDO::PARAM_STR);
                 $this->sql->execute();
                 return true;
             } catch (PDOException $e) {
                 return false;
             }
         }
+        
+        
 
         public function findById(int $id): ?array {
             try {

@@ -12,10 +12,11 @@
             return $this->productosRepository->findAll();
         }
         
-        public function guardarproducto(string $nombreproducto): bool {
-            return $this->productosRepository->guardarproducto($nombreproducto);
+        
+        public function guardarProducto(int $categoria_id, string $nombreProducto, string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha, string $imagen): bool {
+            return $this->productosRepository->guardarProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen);
         }
-
+        
         public function obtenerProductoPorId(int $id): ?array {
             return $this->productosRepository->findById($id);
         }

@@ -105,9 +105,15 @@ class Validacion {
     // Función para sanear strings
     public static function sanearString(string $texto): string {
         // Filtrar solo letras (mayúsculas y minúsculas), números, ñ, vocales acentuadas y espacios, eliminando otros caracteres
-        return preg_replace('/[^A-Za-z0-9\sáéíóúÁÉÍÓÚñÑÁÉÍÓÚáéíóú]+/u', '', $texto);
+        return preg_replace('/[^A-Za-z0-9\sáéíóúÁÉÍÓÚñÑÁÉÍÓÚáéíóú.,]+/u', '', $texto);
     }
     
+    public static function sanearNumero($numero): float{
+        // Sanear el importe: eliminar todos los caracteres excepto los dígitos y el signo de puntuación para permitir números decimales
+        $numero = filter_var($numero, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $numero = floatval($numero);
+        return $numero;
+    }
 
     public static function sanearFecha($fecha): ?string {
         // Verificamos si la fecha tiene el formato correcto ('dd/mm/yyyy' o 'dd-mm-yyyy')

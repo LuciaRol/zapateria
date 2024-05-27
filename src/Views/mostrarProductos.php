@@ -45,6 +45,11 @@
                                     <input type="hidden" name="producto_id" value="<?php echo htmlspecialchars($producto->getId(), ENT_QUOTES, 'UTF-8'); ?>">
                                     <button type="submit">Agregar al carrito</button>
                                 </form>
+                                <!-- Formulario para agregar al carrito -->
+                                <form action="<?= BASE_URL ?>borrar_producto" method="POST">
+                                    <input type="hidden" name="producto_id" value="<?php echo htmlspecialchars($producto->getId(), ENT_QUOTES, 'UTF-8'); ?>">
+                                    <button type="submit">Borrar Producto</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -70,13 +75,13 @@
                 <textarea id="descripcion" name="descripcion" rows="4" cols="50"></textarea><br><br>
 
                 <label for="precio">Precio:</label><br>
-                <input type="number" id="precio" name="precio" step="0.01" required><br><br>
+                <input type="float" id="precio" name="precio" step="0.01" required><br><br>
 
                 <label for="stock">Stock:</label><br>
-                <input type="number" id="stock" name="stock" required><br><br>
+                <input type="float" id="stock" name="stock" required><br><br>
 
-                <label for="oferta">Oferta (opcional):</label><br>
-                <input type="text" id="oferta" name="oferta"><br><br>
+                <label for="oferta">Oferta (opcional, máximo 2 caracteres):</label><br>
+                <input type="text" id="oferta" name="oferta" maxlength="2"><br><br>
 
                 <label for="fecha">Fecha:</label><br>
                 <input type="date" id="fecha" name="fecha" required><br><br>

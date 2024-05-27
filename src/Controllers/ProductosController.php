@@ -7,7 +7,7 @@ use Lib\Pages;
 use Models\Producto;
 use Models\ProductoEnCarrito;
 use Services\UsuariosService;
-
+use Models\Validacion;
 class ProductosController
 {
     private Pages $pagina;
@@ -72,13 +72,11 @@ class ProductosController
             // Verifica si el usuario tiene permisos de administrador
             if ($email->getRol() === 'admin') {
                 // Sanea los datos del producto
-                // $categoria_id = Validacion::sanearEntero($categoria_id);
-                // $nombreProducto = Validacion::sanearTexto($nombreProducto);
-                // $descripcion = Validacion::sanearTexto($descripcion);
-                // $precio = Validacion::sanearFlotante($precio);
-                // $stock = Validacion::sanearEntero($stock);
-                // $oferta = Validacion::sanearTexto($oferta);
-                // $fecha = Validacion::sanearFecha($fecha);
+                $nombreProducto = Validacion::sanearString($nombreProducto);
+                $descripcion = Validacion::sanearString($descripcion);
+                $precio = Validacion::sanearNumero($precio);
+                $stock = Validacion::sanearNumero($stock);
+                $oferta = Validacion::sanearString($oferta);
     
                 // Validar campos obligatorios
                 if (empty($nombreProducto) || empty($categoria_id) || empty($precio) || empty($stock) || empty($fecha)) {

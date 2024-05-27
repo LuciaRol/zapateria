@@ -38,6 +38,7 @@ class ProductosController
             $productoModel = new Producto(
                 $producto['id'],
                 $producto['categoria_id'],
+                $producto['categoria'],
                 $producto['nombre'],
                 $producto['descripcion'],
                 $producto['precio'],

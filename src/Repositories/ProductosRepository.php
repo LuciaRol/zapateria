@@ -13,8 +13,17 @@
         public function findAll() {
             $productoCommit = null;
             try {
-                $this->sql = $this->conexion->prepareSQL("SELECT *  	                                                               
-                                                            FROM productos");
+                $this->sql = $this->conexion->prepareSQL("SELECT    a.id, 
+                                                                    a.categoria_id, 
+                                                                    a.nombre, 
+                                                                    a.descripcion, 
+                                                                    a.precio, 
+                                                                    a.stock, 
+                                                                    a.oferta, 
+                                                                    a.fecha, 
+                                                                    a.imagen, 
+                                                                    b.nombre as 'categoria' 
+                                                        FROM productos a inner join categorias b on a.categoria_id = b.id");
                 
                 $this->sql->execute();
                 $productoCommitData = $this->sql->fetchAll(PDO::FETCH_ASSOC);

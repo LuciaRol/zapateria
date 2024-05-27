@@ -122,7 +122,12 @@ class CarritoController
 
                         // Vaciar el carrito después de realizar la compra
                         unset($_SESSION['carrito']);
-                            
+                        
+                        // falta hacer un insert en lineas_pedido 
+
+                        // falta enviar el email
+
+
                             // Renderizar la página de mostrarCarrito con el email de sesión
                         return $this-> mostrarCarrito($emailSesion);
                         

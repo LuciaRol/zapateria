@@ -121,7 +121,7 @@ class CarritoController
                         $guardar_pedido = $this->pedidosService->guardarPedido($usuario_id, $provincia, $localidad, $direccion, $coste_total);
 
                         // Vaciar el carrito después de realizar la compra
-                        //unset($_SESSION['carrito']);
+                        unset($_SESSION['carrito']);
                             
                             // Renderizar la página de mostrarCarrito con el email de sesión
                         return $this-> mostrarCarrito($emailSesion);

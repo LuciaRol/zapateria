@@ -47,12 +47,19 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
+            <form method="POST" action="<?= BASE_URL ?>comprar_carrito">
+                <label for="provincia">Provincia:</label>
+                <input type="text" id="provincia" name="provincia" required><br>
+                <label for="localidad">Localidad:</label>
+                <input type="text" id="localidad" name="localidad" required><br>
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" required><br>
+                <button type="submit">Comprar Todo el Carrito</button>
+            </form>
+            
         <?php else: ?>
             <p>No hay productos en el carrito.</p>
         <?php endif; ?>
 
-
-        <?php // Imprimir todo el contenido de $_SESSION['carrito'] ?>
-        </main>
 </body>
 </html>

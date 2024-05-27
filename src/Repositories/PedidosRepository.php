@@ -28,10 +28,17 @@
             return $PedidoCommit;
         }
         
-        public function guardarPedido(string $nombrePedido): bool {
+        public function guardarPedido(int $usuario_id, string $provincia, string $localidad, string $direccion, float $coste_total, string $estado, string $fecha, string $hora): bool {
             try {
-                $this->sql = $this->conexion->prepareSQL("INSERT INTO Pedidos (nombre) VALUES (:nombre)");
-                $this->sql->bindParam(':nombre', $nombrePedido, PDO::PARAM_STR);
+                $this->sql = $this->conexion->prepareSQL("INSERT INTO Pedidos (usuario_id, provincia, localidad, direccion, coste, estado, fecha, hora) VALUES (:usuario_id, :provincia, :localidad, :direccion, :coste_total, :estado, :fecha, :hora)");
+                $this->sql->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
+                $this->sql->bindParam(':provincia', $provincia, PDO::PARAM_STR);
+                $this->sql->bindParam(':localidad', $localidad, PDO::PARAM_STR);
+                $this->sql->bindParam(':direccion', $direccion, PDO::PARAM_STR);
+                $this->sql->bindParam(':coste_total', $coste_total, PDO::PARAM_STR);
+                $this->sql->bindParam(':estado', $estado, PDO::PARAM_STR);
+                $this->sql->bindParam(':fecha', $fecha, PDO::PARAM_STR);
+                $this->sql->bindParam(':hora', $hora, PDO::PARAM_STR);
                 $this->sql->execute();
                 return true;
             } catch (PDOException $e) {

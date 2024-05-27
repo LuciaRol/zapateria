@@ -133,6 +133,20 @@
             return (new CarritoController())->mostrarCarrito();
         });
 
+        Router::add('POST', '/comprar_carrito', function () {
+            // Verificar si se ha enviado el formulario para comprar el carrito
+            if (isset($_POST['provincia'], $_POST['localidad'], $_POST['direccion'])) {
+                // Obtener la información del formulario
+                $provincia = $_POST['provincia'];
+                $localidad = $_POST['localidad'];
+                $direccion = $_POST['direccion'];
+                
+                // Calcular el coste total sumando los precios de los productos en el carrito
+                
+                // Llamar a la función comprar pasando los parámetros necesarios
+                return (new CarritoController())->comprar($provincia, $localidad, $direccion);
+            }
+        });
        
 
         Router::dispatch();

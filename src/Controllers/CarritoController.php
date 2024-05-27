@@ -2,11 +2,13 @@
 
 namespace Controllers;
 
+use Services\PedidosService;
 use Services\ProductosService;
 use Lib\Pages;
 use Models\Producto;
 use Models\ProductoEnCarrito;
 use Services\UsuariosService;
+use Services\compraService;
 
 class CarritoController
 {
@@ -14,6 +16,7 @@ class CarritoController
     private ProductosService $productosService;
     private UsuariosService $usuariosService;
 
+    private PedidosService $pedidosService;
     private array $productosEnCarrito; // Aquí almacenaremos los productos en el carrito
 
 
@@ -25,22 +28,14 @@ class CarritoController
         $this->productosService = new ProductosService();
         // Crea una instancia del servicio de usuarios
         $this->usuariosService = new UsuariosService();
+
+        $this->pedidosService = new PedidosService();
+        
         // Inicializa el array de productos en el carrito
         $this->productosEnCarrito = [];
 
         
     }
-    // public function mostrarCarrito($emailRecordado = null, $productosEnCarrito=null)
-    // {
-    //     // Obtener el email del usuario
-    //     $usuarioController = new UsuarioController();
-    //     $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
-        
-
-    //     // Devolver la renderización de la página con los productos en el carrito y el correo electrónico de la sesión
-    //     return $this->pagina->render('mostrarCarrito', ['productosEnCarrito' => $productosEnCarrito, 'emailSesion' => $emailSesion]);
-    // }
-
 
     public function agregarAlCarrito($productoId, $emailRecordado =null)
     {
@@ -105,5 +100,38 @@ class CarritoController
         }
     }
 
+    function comprar($provincia, $localidad,$direccion, $emailSesion = null) {
+        $usuarioController = new UsuarioController();
+            if ($usuarioController->sesion_usuario()) {
+                $emailSesion = $usuarioController->obtenerEmailUsuario($emailSesion);
+                // obtener id desde el email
+                $usuariosService = new UsuariosService();
+            // Verificar si hay elementos en el carrito
+                if (!empty($_SESSION['carrito'])) {
+                    
+                        $usuario = $usuariosService->obtenerUsuarioPorEmail($emailSesion);
 
+                        $usuario_id = $usuario->getId();
+
+                        $coste_total = 0;
+                        foreach ($_SESSION['carrito'] as $producto) {
+                            $coste_total += $producto['precio'];
+                        }
+                        
+                        $guardar_pedido = $this->pedidosService->guardarPedido($usuario_id, $provincia, $localidad, $direccion, $coste_total);
+
+                        // Vaciar el carrito después de realizar la compra
+                        //unset($_SESSION['carrito']);
+                            
+                            // Renderizar la página de mostrarCarrito con el email de sesión
+                        return $this-> mostrarCarrito($emailSesion);
+                        
+                    }
+                    else {
+                        return $this-> mostrarCarrito($emailSesion);
+                        
+                        
+                }
+    }    
+}
 }

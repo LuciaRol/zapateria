@@ -119,7 +119,7 @@ class CarritoController
                         
                         $fecha_actual = date("Y-m-d");
                         $hora_actual = date("H:i:s");
-                        $estado = "Pendiente"; // Estado inicial del pedido
+                        $estado = "No enviado"; // Estado inicial del pedido
 
                         $guardar_pedido = $this->pedidosService->guardarPedido($usuario_id, $provincia, $localidad, $direccion, $coste_total, $fecha_actual, $hora_actual, $estado);
 

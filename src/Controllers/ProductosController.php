@@ -102,14 +102,24 @@ public function eliminarProducto($producto_id, $emailRecordado = null)
 
         $usuarioController = new UsuarioController();
         if ($usuarioController->sesion_usuario()) {
-            $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
+            $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
             
-            $this->productosService->eliminarProducto($producto_id);
-            $mensaje = "Producto borrado exitosamente.";
+            // Verifica si el usuario tiene permisos de administrador
+            if ($email->getRol() === 'admin') {
+                $this->productosService->eliminarProducto($producto_id);
+                $mensaje = "Producto borrado exitosamente.";
 
 
-            // Mostrar el carrito después de eliminar el producto
-            return $this->mostrarProductos($emailSesion, $mensaje);
+                // Mostrar el carrito después de eliminar el producto
+                return $this->mostrarProductos($email, $mensaje);
+            }
+            else {
+                return $this->mostrarProductos(null, $mensaje);
+            }
+        }
+        else {
+            return $this->mostrarProductos(null, $mensaje);
+
         }
     }
 

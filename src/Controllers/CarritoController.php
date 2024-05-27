@@ -5,10 +5,8 @@ namespace Controllers;
 use Services\PedidosService;
 use Services\ProductosService;
 use Lib\Pages;
-use Models\Producto;
-use Models\ProductoEnCarrito;
 use Services\UsuariosService;
-use Services\compraService;
+
 
 class CarritoController
 {
@@ -118,15 +116,44 @@ class CarritoController
                             $coste_total += $producto['precio'];
                         }
                         
-                        $guardar_pedido = $this->pedidosService->guardarPedido($usuario_id, $provincia, $localidad, $direccion, $coste_total);
+                        $fecha_actual = date("Y-m-d");
+                        $hora_actual = date("H:i:s");
+                        $estado = "Pendiente"; // Estado inicial del pedido
 
-                        // Vaciar el carrito después de realizar la compra
-                        unset($_SESSION['carrito']);
+                        $guardar_pedido = $this->pedidosService->guardarPedido($usuario_id, $provincia, $localidad, $direccion, $coste_total, $fecha_actual, $hora_actual, $estado);
+
+                       
+                        // Aquí guardamos los productos del pedido
+                        $pedido_id = $this->pedidosService->buscarPedidoId($usuario_id, $provincia, $localidad, $direccion, $fecha_actual, $hora_actual);
+
+                       // Array para contar la cantidad de productos por id
+                        $cantidad_productos = array();
+
+                        // Recorre todos los productos en el carrito
+                        foreach ($_SESSION['carrito'] as $producto) {
+                            $producto_id = $producto['id'];
+
+                            // Verifica si ya hemos encontrado este producto
+                            if (array_key_exists($producto_id, $cantidad_productos)) {
+                                // Si ya existe, incrementa la cantidad
+                                $cantidad_productos[$producto_id]++;
+                            } else {
+                                // Si no existe, inicializa la cantidad en 1
+                                $cantidad_productos[$producto_id] = 1;
+                            }
+                        }
+
+                        // Ahora, guardamos los productos en la base de datos
+                        foreach ($cantidad_productos as $producto_id => $unidades) {
+                            $guardar_productos_pedido = $this->pedidosService->guardarProductosPedido($pedido_id, $producto_id, $unidades);
+                        }
                         
-                        // falta hacer un insert en lineas_pedido 
 
                         // falta enviar el email
-
+                        
+                         // Vaciar el carrito después de realizar la compra
+                         unset($_SESSION['carrito']);
+                        
 
                             // Renderizar la página de mostrarCarrito con el email de sesión
                         return $this-> mostrarCarrito($emailSesion);

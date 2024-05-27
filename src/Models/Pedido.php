@@ -13,6 +13,8 @@ class Pedido {
     private $fecha;
     private $hora;
 
+    
+
     // Getters y Setters para todas las propiedades
     public function getId() {
         return $this->id;

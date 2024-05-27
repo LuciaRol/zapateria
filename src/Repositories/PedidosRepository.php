@@ -1,7 +1,7 @@
 <?php
     namespace Repositories;
     use Lib\DataBase;
-    use Models\Blog;
+    use Models\Pedido;
     use PDOException;
     use PDO;
     class PedidosRepository{
@@ -39,6 +39,56 @@
                 $this->sql->bindParam(':estado', $estado, PDO::PARAM_STR);
                 $this->sql->bindParam(':fecha', $fecha, PDO::PARAM_STR);
                 $this->sql->bindParam(':hora', $hora, PDO::PARAM_STR);
+                $this->sql->execute();
+                return true;
+            } catch (PDOException $e) {
+                return false;
+            }
+        }
+
+        public function buscarPedidoId(int $usuario_id, string $provincia, string $localidad, string $direccion, string $fecha_actual, string $hora_actual): ?int {
+            try {
+                $this->sql = $this->conexion->prepareSQL("SELECT id 
+                                                            FROM  Pedidos 
+                                                            WHERE 
+                                                            usuario_id = :usuario_id
+                                                            AND provincia = :provincia
+                                                            AND localidad = :localidad
+                                                            AND direccion = :direccion
+                                                            AND fecha = :fecha
+                                                            AND hora = :hora
+                                                            LIMIT 1");
+                $this->sql->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
+                $this->sql->bindParam(':provincia', $provincia, PDO::PARAM_STR);
+                $this->sql->bindParam(':localidad', $localidad, PDO::PARAM_STR);
+                $this->sql->bindParam(':direccion', $direccion, PDO::PARAM_STR);
+                $this->sql->bindParam(':fecha', $fecha_actual, PDO::PARAM_STR);
+                $this->sql->bindParam(':hora', $hora_actual, PDO::PARAM_STR);
+                $this->sql->execute();
+        
+                // Fetch the pedido ID
+                $pedidoId = $this->sql->fetchColumn();
+        
+                // If no pedido ID is found, return null
+                if ($pedidoId === false) {
+                    return null;
+                }
+        
+                // Return the pedido ID as an integer
+                return (int)$pedidoId;
+            } catch (PDOException $e) {
+                // Handle any potential exceptions here
+                return null;
+            }
+        }
+        
+
+        public function guardarProductosPedido(int $pedido_id, int $producto_id, int $unidades): bool {
+            try {
+                $this->sql = $this->conexion->prepareSQL("INSERT INTO lineas_pedidos (pedido_id, producto_id, unidades) VALUES (:pedido_id, :producto_id, :unidades)");
+                $this->sql->bindParam(':pedido_id', $pedido_id, PDO::PARAM_INT);
+                $this->sql->bindParam(':producto_id', $producto_id, PDO::PARAM_STR);
+                $this->sql->bindParam(':unidades', $unidades, PDO::PARAM_STR);
                 $this->sql->execute();
                 return true;
             } catch (PDOException $e) {

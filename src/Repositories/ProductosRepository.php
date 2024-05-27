@@ -82,6 +82,20 @@
                 return false;
             }
         }
-
+        public function eliminarProducto(int $id): bool {
+            try {
+                $this->sql = $this->conexion->prepareSQL("DELETE FROM productos WHERE id = :id");
+                $this->sql->bindParam(':id', $id, PDO::PARAM_INT);
+                $this->sql->execute();
+                
+                // Verificar si se eliminó correctamente el producto
+                return true;
+                
+            } catch (PDOException $e) {
+                // Manejar la excepción si ocurre algún error durante la ejecución de la consulta
+                return false;
+            }
+        }
         
+
     }

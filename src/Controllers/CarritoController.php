@@ -68,21 +68,21 @@ class CarritoController
         }
     }
     public function eliminarDelCarrito($key, $emailRecordado = null)
-{
-    $usuarioController = new UsuarioController();
-    if ($usuarioController->sesion_usuario()) {
-        $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
-        
-        // Verificar si la clave existe en el carrito
-        if (isset($_SESSION['carrito'][$key])) {
-            // Eliminar el producto del carrito utilizando la clave
-            unset($_SESSION['carrito'][$key]);
-        }
+    {
+        $usuarioController = new UsuarioController();
+        if ($usuarioController->sesion_usuario()) {
+            $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
+            
+            // Verificar si la clave existe en el carrito
+            if (isset($_SESSION['carrito'][$key])) {
+                // Eliminar el producto del carrito utilizando la clave
+                unset($_SESSION['carrito'][$key]);
+            }
 
-        // Mostrar el carrito después de eliminar el producto
-        return $this->mostrarCarrito($emailSesion);
+            // Mostrar el carrito después de eliminar el producto
+            return $this->mostrarCarrito($emailSesion);
+        }
     }
-}
 
     public function mostrarCarrito($emailSesion = null)
     {

@@ -95,38 +95,22 @@ class ProductosController
     
         $this->mostrarProductos($email, $mensaje);
     }
-    
+   
+public function eliminarProducto($producto_id, $emailRecordado = null)
+    {   
+        $mensaje = 'Tienes que ser admin para borrar un producto'; // Inicializamos la variable de mensaje
+
+        $usuarioController = new UsuarioController();
+        if ($usuarioController->sesion_usuario()) {
+            $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
+            
+            $this->productosService->eliminarProducto($producto_id);
+            $mensaje = "Producto borrado exitosamente.";
 
 
-    public function agregarAlCarrito($productoId){
-    
-        // Obtener el producto de la base de datos utilizando el ID
-    $producto = $this->productosService->obtenerProductoPorId($productoId);
-
-    // Verificar si se encontró el producto
-    if ($producto) {
-        // Crear un modelo de carrito con los datos del producto
-        $productoEnCarrito = new ProductoEnCarrito(
-            $producto['id'],
-            $producto['categoria_id'],
-            $producto['nombre'],
-            $producto['descripcion'],
-            $producto['precio'],
-            $producto['stock'],
-            $producto['oferta'],
-            $producto['fecha'],
-            $producto['imagen']
-        );
-
-        // Agregar el producto al modelo de carrito (puedes tener una clase Carrito para manejar esto)
-        $productoEnCarrito->agregarProducto($productoEnCarrito);
-
-        // Llamar al método para mostrar los productos (asumo que esto renderizará la página de productos con el carrito actualizado)
-        $this->mostrarProductos();
-    } else {
-        // Si no se encontró el producto, puedes manejar el error de alguna manera (por ejemplo, mostrando un mensaje al usuario)
-        echo "El producto no existe";
-
+            // Mostrar el carrito después de eliminar el producto
+            return $this->mostrarProductos($emailSesion, $mensaje);
+        }
     }
-}
+
 }

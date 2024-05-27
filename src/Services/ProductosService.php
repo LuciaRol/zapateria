@@ -20,6 +20,10 @@
         public function obtenerProductoPorId(int $id): ?array {
             return $this->productosRepository->findById($id);
         }
+
+        public function eliminarProducto(int $id): bool {
+            return $this->productosRepository->eliminarProducto($id);
+        }
     
         public function actualizarStock(int $id, int $nuevoStock): bool {
             return $this->productosRepository->updateStock($id, $nuevoStock);

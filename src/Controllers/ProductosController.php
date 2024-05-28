@@ -54,10 +54,19 @@ class ProductosController
         // Obtener el email del usuario
         $usuarioController = new UsuarioController();
         $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
+        // Verifica si el usuario está autenticado
+        $rol = 'usur';
+        if ($usuarioController->sesion_usuario()) {
+            // Obtén el usuario actual
+            $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
+            // Verifica si el usuario tiene permisos de administrador
+            $rol = $email->getRol();
+            }
+
         $categoriasController = new CategoriasController();
         $categorias = $categoriasController->todasCategorias();
         // Devolver la renderización de la página con los objetos de producto y el correo electrónico de la sesión
-        return $this->pagina->render('mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'mensaje' => $mensaje, 'categorias' => $categorias]);
+        return $this->pagina->render('mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'mensaje' => $mensaje, 'categorias' => $categorias]);
     }
 
     public function registroProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha) {

@@ -32,12 +32,20 @@ class CategoriasController {
         $usuarioController = new UsuarioController();
         // Obtener el email del usuario
         $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
+        $rol = 'usur';
+        if ($usuarioController->sesion_usuario()) {
+            // Obtén el usuario actual
+            $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
+            
+            // Verifica si el usuario tiene permisos de administrador
+            $rol = $email->getRol(); }
 
         // Devolver la renderización de la página con los objetos de categoría, el correo electrónico de la sesión y el mensaje
         return $this->pagina->render('mostrarCategorias', [
             'categorias' => $categoriasModel, 
             'emailSesion' => $emailSesion, 
-            'mensaje' => $mensaje
+            'mensaje' => $mensaje,
+            'rol' => $rol
         ]);
     }
 

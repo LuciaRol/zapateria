@@ -22,6 +22,7 @@
     </div>
 
     <!-- Formulario para crear una nueva categoría -->
+    <?php if ($rol === 'admin'): ?>
     <div class="card">
         <div class="card-body">
             <h2 class="card-h2">Crear Nueva Categoría</h2>
@@ -32,6 +33,7 @@
             </form>
         </div>
     </div>
+    <?php endif; ?>
 
     <!-- Display message if it exists -->
     <?php if (!empty($mensaje)): ?>

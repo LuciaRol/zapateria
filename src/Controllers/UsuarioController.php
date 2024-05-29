@@ -62,9 +62,10 @@ class UsuarioController {
         $emailRecordado = isset($_COOKIE['email_recordado']) ? $_COOKIE['email_recordado'] : null;
     
         // Llama a mostrarBlog con el posible mensaje de error del login y la variable $emailRecordado
-        $productosController = new ProductosController();
+        $CategoriasController = new CategoriasController();
 
-        return $productosController->mostrarProductos($emailRecordado);
+        return $CategoriasController->mostrarTodos($emailRecordado);
+        
     }
 
     public function logout() {
@@ -82,9 +83,9 @@ class UsuarioController {
         }
     
         // Redirige a mostrarTodos en CategoriasController
-        $productosController = new ProductosController();
+        $CategoriasController = new CategoriasController();
 
-        return $productosController->mostrarProductos();
+        return $CategoriasController->mostrarTodos();
     }
     public function sesion_usuario(): bool {
         // Inicia la sesión si no ha sido iniciada ya

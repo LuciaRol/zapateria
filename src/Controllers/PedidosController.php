@@ -51,6 +51,11 @@ class PedidosController {
         // Crear un array para almacenar los objetos de pedido
         $pedidosModel = [];
 
+        if ($pedidos === null) {
+            $pedidos = [];
+        }
+        
+        
         foreach ($pedidos as $pedido) {
             // Crear una nueva instancia de Pedido con los datos del pedido
             $pedidoModel = new Pedido();

@@ -174,6 +174,18 @@ class UsuarioController {
             $this->mostrarUsuario($error_message);
             return;
         }
+        $usuario = null;
+        $usuarioController = new UsuarioController();
+
+        if ($usuarioController->sesion_usuario()) {
+            // Obtén el usuario actual
+            $usuario = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
+            // Verificar y asignar valores si son nulos
+            }
+        $nombre = $nombre !== null ? $nombre : $usuario->getNombre();
+        $apellidos = $apellidos !== null ? $apellidos : $usuario->getApellidos();
+
+
     
         // Continuar con la actualización del usuario utilizando los campos saneados
         $resultado = $this->usuariosService->actualizarUsuario(

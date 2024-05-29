@@ -18,18 +18,22 @@
         <form action="<?= BASE_URL ?>edita_perfil" method="POST"> 
             <h3>Editar Perfil</h3>
             <label for="new_nombre">Nuevo Nombre:</label>
-            <input type="text" id="new_nombre" name="new_nombre" placeholder="Nuevo nombre">
+            <input type="text" id="new_nombre" name="new_nombre" placeholder="Nuevo nombre"  required>
             <br>
             <label for="new_apellidos">Nuevos Apellidos:</label>
-            <input type="text" id="new_apellidos" name="new_apellidos" placeholder="Nuevos apellidos">
+            <input type="text" id="new_apellidos" name="new_apellidos" placeholder="Nuevos apellidos"  required>
             <br>
             <!-- Campo oculto para enviar el valor de $email -->
             <input type="hidden" name="new_email" value="<?= htmlspecialchars($email) ?>">
-            <label for="new_rol">Nuevo Rol:</label>
-            <select id="new_rol" name="new_rol">
-                <option value="admin">Admin</option>
-                <option value="usur">Usuario</option>
-            </select>
+            <?php if ($rol === 'admin'): ?>
+                <label for="new_rol">Nuevo Rol:</label>
+                <select id="new_rol" name="new_rol">
+                    <option value="admin">Admin</option>
+                    <option value="usur">Usuario</option>
+                </select>
+            <?php else: ?>
+                <input type="hidden" name="new_rol" value="usur">
+            <?php endif; ?>
             <br>
             <input type="submit" value="Guardar Cambios">
         </form>

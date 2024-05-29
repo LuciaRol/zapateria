@@ -144,9 +144,16 @@ class UsuarioController {
         if ($error !== null) {
             $data['error_message'] = $error;
         }
+
+        if ($rol == 'admin'){
+
+            $usuarios = $this->usuariosService->obtenerUsuarios();
+            $data['usuarios'] = $usuarios;
+        }
     
         // Renderizar la vista de usuario pasando las propiedades del usuario y el mensaje de error si existe
         $this->pagina->render("mostrarUsuario", $data);
+        
     }
 
     public function mostrarRegistro($error = null) {

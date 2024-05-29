@@ -78,6 +78,23 @@
             }
         }
 
+        public function obtenerUsuarios() {
+            $usuarioData = null;
+            try {
+                $this->sql = $this->conexion->prepareSQL("SELECT * FROM usuarios");
+                
+                $this->sql->execute();
+                $usuarioData = $this->sql->fetchAll(PDO::FETCH_ASSOC);
+                $this->sql->closeCursor();
+                $usuarioCommit = $usuarioData ?: null;
+                
+            } catch (PDOException $e) {
+                $usuarioCommit = $e->getMessage();
+            }
+        
+            return $usuarioCommit;
+        }
+
        
         
     }

@@ -2,6 +2,8 @@
     namespace Repositories;
     use Lib\DataBase;
     use Models\Blog;
+    use Models\Validacion;
+    use Models\Producto;
     use PDOException;
     use PDO;
     class productosRepository{
@@ -96,6 +98,47 @@
                 return false;
             }
         }
+
+        
+        
+        public function buscarProductos($descripcion) {
+            $productoCommit = null;
+            try {
+
+                $descripcion = strtolower($descripcion);
+
+                $this->sql = $this->conexion->prepareSQL("SELECT    a.id, 
+                                                            a.categoria_id, 
+                                                            a.nombre, 
+                                                            a.descripcion, 
+                                                            a.precio, 
+                                                            a.stock, 
+                                                            a.oferta, 
+                                                            a.fecha, 
+                                                            a.imagen, 
+                                                            b.nombre as 'categoria' 
+                                                    FROM productos a inner join categorias b on a.categoria_id = b.id
+                                                    where LOWER(a.descripcion) like :descripcion or LOWER(a.nombre) like :descripcion or LOWER(b.nombre) like :descripcion");
+                $this->sql->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
+                $this->sql->execute();
+                $productoCommitData = $this->sql->fetchAll(PDO::FETCH_ASSOC);
+                $this->sql->closeCursor();
+                $productoCommit = $productoCommitData ?: null;
+                
+            } catch (PDOException $e) {
+                $productoCommit = $e->getMessage();
+            }
+        
+            return $productoCommit;
+        }
+        
         
 
-    }
+
+
+
+
+
+
+
+}

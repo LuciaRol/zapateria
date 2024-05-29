@@ -176,8 +176,15 @@
                 return (new CarritoController())->comprar($provincia, $localidad, $direccion);
             }
         });
-       
 
+        Router::add('POST', '/busqueda', function () {
+            if (isset($_POST['q'])) {
+                $terminoBusqueda = trim($_POST['q']);
+                return (new ProductosController())->buscarProductos($terminoBusqueda);
+            }
+        });
+        
+        
         Router::dispatch();
     }
   }

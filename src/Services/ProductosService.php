@@ -28,4 +28,10 @@
         public function actualizarStock(int $id, int $nuevoStock): bool {
             return $this->productosRepository->updateStock($id, $nuevoStock);
         }
+
+        public function buscarProductos(string $terminoBusqueda): ?array {
+            return $this->productosRepository->buscarProductos($terminoBusqueda);
+        }
+
+        
     }

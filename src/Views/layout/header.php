@@ -7,7 +7,7 @@
         </div>
         <nav class="nav_container">
             <a class="nav_link" href="<?= BASE_URL ?>">Inicio</a>
-            <a class="nav_link" href="<?= BASE_URL ?>categorias">Categorias</a>
+            <a class="nav_link" href="<?= BASE_URL ?>categorias">Categorías</a>
             <a class="nav_link" href="<?= BASE_URL ?>pedidos">Pedidos Completados</a>
             <a class="nav_link" href="<?= BASE_URL ?>usuario">Usuario</a>
             <a class="nav_link" href="<?= BASE_URL ?>carrito">Carrito</a>
@@ -17,12 +17,11 @@
 
     <div class="header_second_div">
         <div class="search_container">
-            <form action="<?= BASE_URL ?>?controller=Blog&action=buscar" method="POST">
+            <form action="<?=  BASE_URL ?>busqueda" method="POST">
                 <input class="search_input" type="text" name="q" placeholder="Busca">
                 <button type="submit" class="search_button login_btn">Buscar</button>
-            </form>
-            
-    </div>
+            </form>  
+        </div>
 
         <div class="login_container">
             <?php if (isset($_SESSION['email'])): ?>

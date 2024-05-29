@@ -105,8 +105,7 @@ class ProductosController
         $this->mostrarProductos($email, $mensaje);
     }
    
-public function eliminarProducto($producto_id, $emailRecordado = null)
-    {   
+public function eliminarProducto($producto_id, $emailRecordado = null) {   
         $mensaje = 'Tienes que ser admin para borrar un producto'; // Inicializamos la variable de mensaje
 
         $usuarioController = new UsuarioController();
@@ -130,6 +129,50 @@ public function eliminarProducto($producto_id, $emailRecordado = null)
             return $this->mostrarProductos(null, $mensaje);
 
         }
+}
+
+public function buscarProductos($terminoBusqueda)
+    {
+        // Sanear el término de búsqueda
+        $terminoBusqueda = Validacion::sanearString($terminoBusqueda);
+
+        // Llamar al servicio de productos para buscar productos
+        $productos = $this->productosService->buscarProductos($terminoBusqueda);
+
+        // Crear un array para almacenar los objetos de producto
+        $productosModel = [];
+        foreach ($productos as $producto) {
+            $productoModel = new Producto(
+                $producto['id'],
+                $producto['categoria_id'],
+                $producto['categoria'],
+                $producto['nombre'],
+                $producto['descripcion'],
+                $producto['precio'],
+                $producto['stock'],
+                $producto['oferta'],
+                $producto['fecha'],
+                $producto['imagen']
+            );
+            $productosModel[] = $productoModel;
+        }
+
+        // Obtener el email del usuario
+        $usuarioController = new UsuarioController();
+        $emailSesion = $usuarioController->obtenerEmailUsuario(null);
+
+        // Verifica si el usuario está autenticado
+        $rol = 'usur';
+        if ($usuarioController->sesion_usuario()) {
+            $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
+            $rol = $email->getRol();
+        }
+
+        $categoriasController = new CategoriasController();
+        $categorias = $categoriasController->todasCategorias();
+
+        // Devolver la renderización de la página con los resultados de búsqueda
+        return $this->pagina->render('resultadosBusqueda', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'terminoBusqueda' => $terminoBusqueda, 'categorias' => $categorias]);
     }
 
 }

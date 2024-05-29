@@ -46,10 +46,12 @@
                                     <button type="submit">Agregar al carrito</button>
                                 </form>
                                 <!-- Formulario para agregar al carrito -->
+                                <?php if ($rol === 'admin'): ?>
                                 <form action="<?= BASE_URL ?>eliminar_producto" method="POST">
                                     <input type="hidden" name="producto_id" value="<?php echo htmlspecialchars($producto->getId(), ENT_QUOTES, 'UTF-8'); ?>">
                                     <button type="submit">Borrar Producto</button>
                                 </form>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

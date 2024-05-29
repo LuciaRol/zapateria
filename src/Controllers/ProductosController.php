@@ -172,7 +172,7 @@ public function buscarProductos($terminoBusqueda)
         $categorias = $categoriasController->todasCategorias();
 
         // Devolver la renderización de la página con los resultados de búsqueda
-        return $this->pagina->render('resultadosBusqueda', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'terminoBusqueda' => $terminoBusqueda, 'categorias' => $categorias]);
+        return $this->pagina->render('mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'terminoBusqueda' => $terminoBusqueda, 'categorias' => $categorias]);
     }
 
 }

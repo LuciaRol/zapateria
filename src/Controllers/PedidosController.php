@@ -25,12 +25,19 @@ class PedidosController {
         $this->usuariosService = new UsuariosService();
     }
 
-    public function mostrarPedidos($emailRecordado = null) {
+    public function mostrarPedidos($emailRecordado = null, $userID = null) {
         
         
         $usuarioController = new UsuarioController();
         // Obtener el email del usuario
         $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
+
+        if ($usuarioController->sesion_usuario()) {
+            // Obtén el usuario actual
+            $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
+            
+            // Verifica si el usuario tiene permisos de administrador
+            $userID = $email->getId(); }
 
         
          // Si no hay email de sesión, redirigir a mostrarTodos en CategoriasController
@@ -40,10 +47,10 @@ class PedidosController {
             return $productosController->mostrarProductos($emailSesion, $mensaje);
         }
         // Obtener todos los pedidos
-        $pedidos = $this->PedidosService->obtenerPedidos();
-    
+        $pedidos = $this->PedidosService->obtenerPedidos($userID);
         // Crear un array para almacenar los objetos de pedido
         $pedidosModel = [];
+
         foreach ($pedidos as $pedido) {
             // Crear una nueva instancia de Pedido con los datos del pedido
             $pedidoModel = new Pedido();

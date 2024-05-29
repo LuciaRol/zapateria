@@ -9,8 +9,8 @@
             $this->PedidosRepository = new PedidosRepository();
         }
 
-        public function obtenerPedidos() :?array {
-            return $this->PedidosRepository->findAll();
+        public function obtenerPedidos($user_id) :?array {
+            return $this->PedidosRepository->findPedidos($user_id);
         }
         
         public function guardarPedido(int $usuario_id, string $provincia, string $localidad, string $direccion, float $coste_total, string $fecha_actual, string $hora_actual, string $estado): bool {

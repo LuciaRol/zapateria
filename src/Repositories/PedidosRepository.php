@@ -27,6 +27,20 @@
         
             return $PedidoCommit;
         }
+
+        public function findPedidos($usuario_id): ?array {
+            try {
+                $this->sql = $this->conexion->prepareSQL("SELECT * FROM pedidos WHERE usuario_id = :usuario_id");
+                $this->sql->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
+                $this->sql->execute();
+                $pedidos = $this->sql->fetchAll(PDO::FETCH_ASSOC);
+                $this->sql->closeCursor();
+                return $pedidos ?: null;
+            } catch (PDOException $e) {
+                return null;
+            }
+        }
+        
         
         public function guardarPedido(int $usuario_id, string $provincia, string $localidad, string $direccion, float $coste_total, string $estado, string $fecha, string $hora): bool {
             try {

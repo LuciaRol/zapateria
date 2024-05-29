@@ -16,10 +16,10 @@
         });*/
         
         Router::add('GET','/', function () {
-            return (new ProductosController())->mostrarProductos();
-        });
-        Router::add('GET','/categorias', function (){
             return (new CategoriasController())->mostrarTodos();
+        });
+        Router::add('GET','/productos', function (){
+            return (new ProductosController())->mostrarProductos();
         });
 
         Router::add('POST', '/registro_usuario', function () {

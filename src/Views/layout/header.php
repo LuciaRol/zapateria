@@ -7,8 +7,8 @@
         </div>
         <nav class="nav_container">
             <a class="nav_link" href="<?= BASE_URL ?>">Inicio</a>
-            <a class="nav_link" href="<?= BASE_URL ?>categorias">Categorías</a>
-            <a class="nav_link" href="<?= BASE_URL ?>pedidos">Pedidos Completados</a>
+            <a class="nav_link" href="<?= BASE_URL ?>productos">Productos</a>
+            <a class="nav_link" href="<?= BASE_URL ?>pedidos">Pedidos</a>
             <a class="nav_link" href="<?= BASE_URL ?>usuario">Usuario</a>
             <a class="nav_link" href="<?= BASE_URL ?>carrito">Carrito</a>
             <a class="nav_link" href="<?= BASE_URL ?>registro">Registro</a>

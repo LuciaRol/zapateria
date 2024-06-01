@@ -33,8 +33,8 @@
             return $this->productosRepository->buscarProductos($terminoBusqueda);
         }
 
-        public function editarProducto(int $productoId, int $categoria_id, string $nombreProducto, string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha, string $imagen): bool {
-            return $this->productosRepository->editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen);
+        public function editarProducto(int $productoId, int $categoria_id, string $nombreProducto, string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha): bool {
+            return $this->productosRepository->editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha);
         }
         
     }

@@ -35,7 +35,10 @@
                         <td><?php echo htmlspecialchars($producto['stock'], ENT_QUOTES, 'UTF-8'); ?></td>
                         <td><?php echo htmlspecialchars($producto['oferta'] ?? 'No', ENT_QUOTES, 'UTF-8'); ?></td>
                         <td><?php echo htmlspecialchars($producto['fecha'], ENT_QUOTES, 'UTF-8'); ?></td>
-                        <td><img src="<?php echo htmlspecialchars($producto['imagen'] ?? 'placeholder.jpg', ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto"></td>
+                        <td>
+                            <img src="<?php echo htmlspecialchars('public/img/' . ($producto['imagen'] ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
+                        </td>
+
                         <td> 
                             <form method="POST" action="<?= BASE_URL ?>eliminar_producto_carrito">
                                 <input type="hidden" name="producto_id" value="<?php echo $producto['id']; ?>">

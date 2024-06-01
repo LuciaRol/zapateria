@@ -69,7 +69,7 @@ class ProductosController
         return $this->pagina->render('mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'mensaje' => $mensaje, 'categorias' => $categorias]);
     }
 
-    public function registroProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha) {
+    public function registroProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen) {
         $mensaje = 'Regístrate como admin para crear un producto'; // Inicializamos la variable de mensaje
         
         $usuarioController = new UsuarioController();
@@ -92,7 +92,7 @@ class ProductosController
                     $mensaje = "Debe proporcionar todos los campos obligatorios.";
                 } else {
                     // Guardar el nuevo producto
-                    $imagen = "";
+                    
                     $this->productosService->guardarProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen);
                     $mensaje = "Producto creado exitosamente.";
                 }
@@ -128,8 +128,8 @@ class ProductosController
                     $mensaje = "Debe proporcionar todos los campos obligatorios.";
                 } else {
                     // Editar el producto existente
-                    $imagen = ""; // Si es necesario, incluir lógica para manejar imágenes
-                    $this->productosService->editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen);
+                    
+                    $this->productosService->editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha);
                     $mensaje = "Producto actualizado exitosamente.";
                 }
             } else {

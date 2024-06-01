@@ -156,9 +156,10 @@
                 $oferta = $_POST['oferta'];
                 $fecha = $_POST['fecha'];
                 $categoria_id = $_POST['categoria'];
+                $imagen = $_POST['imagen'];
                 
                 // Llamar a la función para registrar el nuevo producto
-                return (new ProductosController())->registroProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha);
+                return (new ProductosController())->registroProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen);
             }
         });
 
@@ -174,6 +175,7 @@
                 $stock = intval($_POST['stock']); // Convertir a int
                 $oferta = $_POST['oferta'];
                 $fecha = $_POST['fecha'];
+              
                 $categoria_id = $_POST['categoria_id'];
         
                 // Validar los datos antes de continuar

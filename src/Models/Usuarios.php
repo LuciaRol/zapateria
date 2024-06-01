@@ -100,14 +100,4 @@ class Usuarios
     }
     
 
-    public function getIdByEmail(string $email): ?int
-    {
-        $usuario = $this->usuariosRepository->findByEmail($email); // Suponiendo que haya un método para encontrar un usuario por su email en el repositorio
-
-        if ($usuario) {
-            return $usuario->getId();
-        }
-
-        return null;
-    }
 }

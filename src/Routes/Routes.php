@@ -162,6 +162,36 @@
             }
         });
 
+
+        Router::add('POST', '/editar_producto', function () {
+            // Verificar si se ha enviado el formulario para editar un producto
+            if (isset($_POST['nombre'], $_POST['descripcion'], $_POST['precio'], $_POST['stock'], $_POST['oferta'], $_POST['fecha'])) {
+                // Obtener la información del formulario
+                $productoId = $_POST['producto_id'];
+                $nombreProducto = $_POST['nombre'];
+                $descripcion = $_POST['descripcion'];
+                $precio = floatval($_POST['precio']); // Convertir a float
+                $stock = intval($_POST['stock']); // Convertir a int
+                $oferta = $_POST['oferta'];
+                $fecha = $_POST['fecha'];
+                $categoria_id = $_POST['categoria_id'];
+        
+                // Validar los datos antes de continuar
+                // Aquí deberías incluir validaciones adicionales según tus requisitos
+        
+                // Llamar a la función para editar el producto
+                return (new ProductosController())->editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha);
+            } else {
+                // Enviar una respuesta de error si faltan datos en el formulario
+                http_response_code(400); // Bad Request
+                echo "Error: Faltan datos en el formulario de edición.";
+                exit();
+            }
+        });
+        
+        
+        
+
         Router::add('POST', '/comprar_carrito', function () {
             // Verificar si se ha enviado el formulario para comprar el carrito
             if (isset($_POST['provincia'], $_POST['localidad'], $_POST['direccion'])) {

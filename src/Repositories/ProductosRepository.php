@@ -57,6 +57,33 @@
                 return false;
             }
         }
+        public function editarProducto(int $productoId, int $categoria_id, string $nombre, ?string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha, ?string $imagen): bool {
+            try {
+                $this->sql = $this->conexion->prepareSQL("UPDATE productos SET 
+                                                            categoria_id = :categoria_id, 
+                                                            nombre = :nombre, 
+                                                            descripcion = :descripcion, 
+                                                            precio = :precio, 
+                                                            stock = :stock, 
+                                                            oferta = :oferta, 
+                                                            fecha = :fecha, 
+                                                            imagen = :imagen 
+                                                        WHERE id = :productoId");
+                $this->sql->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
+                $this->sql->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+                $this->sql->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
+                $this->sql->bindParam(':precio', $precio, PDO::PARAM_STR);
+                $this->sql->bindParam(':stock', $stock, PDO::PARAM_INT);
+                $this->sql->bindParam(':oferta', $oferta, PDO::PARAM_STR);
+                $this->sql->bindParam(':fecha', $fecha, PDO::PARAM_STR);
+                $this->sql->bindParam(':imagen', $imagen, PDO::PARAM_STR);
+                $this->sql->bindParam(':productoId', $productoId, PDO::PARAM_INT);
+                $this->sql->execute();
+                return true;
+            } catch (PDOException $e) {
+                return false;
+            }
+        }
         
         
 

@@ -104,6 +104,43 @@ class ProductosController
     
         $this->mostrarProductos($email, $mensaje);
     }
+
+    public function editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha) {
+        $mensaje = 'Regístrate como admin para editar un producto'; // Inicializamos la variable de mensaje
+        
+        $usuarioController = new UsuarioController();
+        // Verifica si el usuario está autenticado
+        if ($usuarioController->sesion_usuario()) {
+            // Obtén el usuario actual
+            $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
+            
+            // Verifica si el usuario tiene permisos de administrador
+            if ($email->getRol() === 'admin') {
+                // Sanea los datos del producto
+                $nombreProducto = Validacion::sanearString($nombreProducto);
+                $descripcion = Validacion::sanearString($descripcion);
+                $precio = Validacion::sanearNumero($precio);
+                $stock = Validacion::sanearNumero($stock);
+                $oferta = Validacion::sanearString($oferta);
+    
+                // Validar campos obligatorios
+                if (empty($nombreProducto) || empty($categoria_id) || empty($precio) || empty($stock) || empty($fecha)) {
+                    $mensaje = "Debe proporcionar todos los campos obligatorios.";
+                } else {
+                    // Editar el producto existente
+                    $imagen = ""; // Si es necesario, incluir lógica para manejar imágenes
+                    $this->productosService->editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen);
+                    $mensaje = "Producto actualizado exitosamente.";
+                }
+            } else {
+                // Si el usuario no es administrador, asigna un mensaje indicando que no tiene permisos suficientes
+                $mensaje = "No tienes permisos de administrador para editar productos.";
+            }
+        }
+    
+        $this->mostrarProductos($email, $mensaje);
+    }
+    
    
 public function eliminarProducto($producto_id, $emailRecordado = null) {   
         $mensaje = 'Tienes que ser admin para borrar un producto'; // Inicializamos la variable de mensaje

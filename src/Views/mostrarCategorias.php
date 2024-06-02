@@ -15,6 +15,11 @@
                     <article class="categoria">
                         <p>ID: <?php echo $categoria->getId(); ?></p>
                         <p>Nombre: <?php echo $categoria->getNombre(); ?></p>
+                        <!-- Formulario para mostrar productos de esta categoría -->
+                        <form action="<?= BASE_URL ?>busqueda" method="POST">
+                            <input type="hidden" name="q" value="<?php echo $categoria->getNombre(); ?>">
+                            <input type="submit" value="Mostrar productos de categoría">
+                        </form>
                     </article>
                 </div>
             </div>

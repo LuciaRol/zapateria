@@ -36,7 +36,7 @@
                         <td><?php echo htmlspecialchars($producto['oferta'] ?? 'No', ENT_QUOTES, 'UTF-8'); ?></td>
                         <td><?php echo htmlspecialchars($producto['fecha'], ENT_QUOTES, 'UTF-8'); ?></td>
                         <td>
-                            <img src="<?php echo htmlspecialchars('public/img/' . ($producto['imagen'] ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
+                            <img class="img_zapato" src="<?php echo htmlspecialchars('public/img/' . ($producto['imagen'] ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
                         </td>
 
                         <td> 

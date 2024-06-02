@@ -53,7 +53,7 @@
                                 <span class="texto"><?php echo htmlspecialchars($producto->getFecha(), ENT_QUOTES, 'UTF-8'); ?></span>
                             </td>
                             <td>
-                                <img src="<?php echo htmlspecialchars('public/img/' . ($producto->getImagen() ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
+                                <img class="img_zapato" src="<?php echo htmlspecialchars('public/img/' . ($producto->getImagen() ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
                             </td>
                             <td>
                                 <!-- Formulario para agregar al carrito -->
@@ -151,7 +151,7 @@
                 <td><input type="text" name="oferta" maxlength="2" value="<?php echo htmlspecialchars($producto->getOferta() ?? 'No', ENT_QUOTES, 'UTF-8'); ?>"></td>
                 <td><input type="date" name="fecha" value="<?php echo htmlspecialchars($producto->getFecha(), ENT_QUOTES, 'UTF-8'); ?>"></td>
                 <td>
-                                <img src="<?php echo htmlspecialchars('public/img/' . ($producto->getImagen() ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
+                                <img class="img_zapato" src="<?php echo htmlspecialchars('public/img/' . ($producto->getImagen() ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
                             </td>
                 <td>
                     <button type="submit">Guardar</button> <!-- No es necesario el formulario en la celda de acciones -->

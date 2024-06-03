@@ -10,7 +10,7 @@
         function __construct(){
             $this->conexion = new DataBase();
         }
-        public function findAll() {
+        public function findAll():array|string|null {
             $PedidoCommit = null;
             try {
                 $this->sql = $this->conexion->prepareSQL("SELECT *  	                                                               

@@ -12,7 +12,7 @@
         function __construct(){
             $this->conexion = new DataBase();
         }
-        public function findAll() {
+        public function findAll():array|string|null {
             $productoCommit = null;
             try {
                 $this->sql = $this->conexion->prepareSQL("SELECT    a.id, 
@@ -127,7 +127,7 @@
 
         
         
-        public function buscarProductos($descripcion) {
+        public function buscarProductos($descripcion):array|string|null {
             $productoCommit = null;
             try {
 

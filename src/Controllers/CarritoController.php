@@ -94,8 +94,8 @@ class CarritoController
         }
         else{
             $mensaje = "Tienes que registrarte para poder ver el carrito";
-            $productosController = new ProductosController();
-            return $productosController->mostrarProductos($emailSesion, $mensaje);
+            $categoriasController = new CategoriasController();
+            return $categoriasController->mostrarTodos($emailSesion, $mensaje);
         }
     }
 

@@ -242,6 +242,10 @@ h2 {
 
 /* REGISTRO */
 
+.registro-container{
+	height: 65vh;
+}
+
 .registro-form {
     max-width: 400px;
     margin: 0 auto;
@@ -259,6 +263,7 @@ h2 {
 
 .registro-form input[type="text"],
 .registro-form input[type="password"],
+.registro-form input[type="email"],
 .registro-form button {
     width: 100%;
     margin-bottom: 10px;
@@ -270,13 +275,14 @@ h2 {
 
 .registro-form button {
     background-color: var(--contrast);
-    color: var(--text-title);
+    color: var(--text);
     cursor: pointer;
 	border: none;
 }
 
 .registro-form button:hover {
     background-color: var(--contrat-hover);
+	color: var(--text-title);
     border: 1px solid var(--primary-light);
 	border:none;
 }

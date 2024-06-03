@@ -7,6 +7,7 @@
 </head>
 <body>
     <main>
+        
         <h2>Productos en el Carrito</h2>
         
         <?php if (!empty($_SESSION['carrito'])): ?>

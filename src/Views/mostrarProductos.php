@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Lista de Productos</title>
-    <link rel="stylesheet" href="public/css/styles.css">
-</head>
 <body>
     <main>
-        <h2>Lista de Productos</h2>
+        <h2>Lista de productos</h2>
         <?php if (!empty($mensaje)): ?>
             <p class="mensaje"><?php echo $mensaje; ?></p>
         <?php endif; ?>
@@ -19,7 +12,7 @@
                         <th>Categoría</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Precio</th>
+                        <th>Precio (€)</th>
                         <th>Stock</th>
                         <th>Oferta</th>
                         <th>Fecha</th>
@@ -80,7 +73,7 @@
         <?php if ($rol === 'admin'): ?>
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-h2">Crear Nuevo Producto</h2>
+                    <h2 class="card-h2">Crear nuevo producto</h2>
                     <form action="<?= BASE_URL ?>nuevo_producto" method="POST"> 
                         <label for="nuevo_producto">Nombre del Producto:</label><br>
                         <input type="text" id="nuevo_producto" name="nuevo_producto" required><br><br> 
@@ -118,7 +111,7 @@
             </div>
         <?php endif; ?>
         <?php if ($rol === 'admin'): ?>
-             <h2>Lista de Productos Editable</h2>
+             <h2>Editar productos ya existentes</h2>
         <table class="productos-table">
             <thead>
                 <tr>
@@ -135,32 +128,33 @@
                 </tr>
             </thead>
             <tbody>
-    <?php foreach ($productos as $producto): ?>
-        <tr>
-            <!-- Agregar un formulario para cada fila -->
-            <form action="<?= BASE_URL ?>editar_producto" method="POST">
-                <!-- Utilizar el ID del producto como identificador único -->
-                <input type="hidden" name="producto_id" value="<?php echo htmlspecialchars($producto->getId(), ENT_QUOTES, 'UTF-8'); ?>">
-                <input type="hidden" name="categoria_id" value="<?php echo htmlspecialchars($producto->getCategoriaId(), ENT_QUOTES, 'UTF-8'); ?>">
-                <td><?php echo htmlspecialchars($producto->getId(), ENT_QUOTES, 'UTF-8'); ?></td>
-                <td><?php echo htmlspecialchars($producto->getNombre_categoria(), ENT_QUOTES, 'UTF-8'); ?></td>
-                <td><input type="text" name="nombre" value="<?php echo htmlspecialchars($producto->getNombre(), ENT_QUOTES, 'UTF-8'); ?>"></td>
-                <td><textarea name="descripcion"><?php echo htmlspecialchars($producto->getDescripcion() ?? 'Sin descripción', ENT_QUOTES, 'UTF-8'); ?></textarea></td>
-                <td><input type="number" name="precio" value="<?php echo htmlspecialchars($producto->getPrecio(), ENT_QUOTES, 'UTF-8'); ?>"></td>
-                <td><input type="number" name="stock" value="<?php echo htmlspecialchars($producto->getStock(), ENT_QUOTES, 'UTF-8'); ?>"></td>
-                <td><input type="text" name="oferta" maxlength="2" value="<?php echo htmlspecialchars($producto->getOferta() ?? 'No', ENT_QUOTES, 'UTF-8'); ?>"></td>
-                <td><input type="date" name="fecha" value="<?php echo htmlspecialchars($producto->getFecha(), ENT_QUOTES, 'UTF-8'); ?>"></td>
-                <td>
-                                <img class="img_zapato" src="<?php echo htmlspecialchars('public/img/' . ($producto->getImagen() ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
+                <?php foreach ($productos as $producto): ?>
+                    <tr>
+                        <!-- Agregar un formulario para cada fila -->
+                        <form action="<?= BASE_URL ?>editar_producto" method="POST">
+                            <!-- Utilizar el ID del producto como identificador único -->
+                            <input type="hidden" name="producto_id" value="<?php echo htmlspecialchars($producto->getId(), ENT_QUOTES, 'UTF-8'); ?>">
+                            <input type="hidden" name="categoria_id" value="<?php echo htmlspecialchars($producto->getCategoriaId(), ENT_QUOTES, 'UTF-8'); ?>">
+                            <td><?php echo htmlspecialchars($producto->getId(), ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($producto->getNombre_categoria(), ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><input type="text" name="nombre" value="<?php echo htmlspecialchars($producto->getNombre(), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                            <td><textarea name="descripcion"><?php echo htmlspecialchars($producto->getDescripcion() ?? 'Sin descripción', ENT_QUOTES, 'UTF-8'); ?></textarea></td>
+                            <td><input type="number" name="precio" value="<?php echo htmlspecialchars($producto->getPrecio(), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                            <td><input type="number" name="stock" value="<?php echo htmlspecialchars($producto->getStock(), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                            <td><input type="text" name="oferta" maxlength="2" value="<?php echo htmlspecialchars($producto->getOferta() ?? 'No', ENT_QUOTES, 'UTF-8'); ?>"></td>
+                            <td><input type="date" name="fecha" value="<?php echo htmlspecialchars($producto->getFecha(), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                            <td>
+                                            <img class="img_zapato" src="<?php echo htmlspecialchars('public/img/' . ($producto->getImagen() ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
+                                        </td>
+                            <td>
+                                <button type="submit">Guardar</button> <!-- No es necesario el formulario en la celda de acciones -->
                             </td>
-                <td>
-                    <button type="submit">Guardar</button> <!-- No es necesario el formulario en la celda de acciones -->
-                </td>
-            </form>
-        </tr>
-    <?php endforeach; ?>
-    <?php endif; ?>
+                        </form>
+                    </tr>
+                <?php endforeach; ?>
+        <?php endif; ?>
 </tbody>
+</table>
     </main>
 </body>
 </html>

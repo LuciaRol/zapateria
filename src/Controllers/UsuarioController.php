@@ -120,8 +120,8 @@ class UsuarioController {
         // Si no hay email de sesión, redirigir a mostrarTodos en CategoriasController
         if (!$emailSesion) {
             $mensaje = "Tienes que registrarte para poder ver tu usuario";
-            $productosController = new ProductosController();
-            return $productosController->mostrarProductos($emailSesion, $mensaje);
+            $categoriasController = new CategoriasController();
+            return $categoriasController->mostrarTodos($emailSesion, $mensaje);
         }
     
         // Obtén los datos del usuario autenticado
@@ -226,6 +226,8 @@ class UsuarioController {
         // Devolver los campos saneados
         return $usuarioSaneado;
     }
+
+
     
 }
 

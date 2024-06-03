@@ -43,8 +43,8 @@ class PedidosController {
          // Si no hay email de sesión, redirigir a mostrarTodos en CategoriasController
          if (!$emailSesion) {
             $mensaje = "Tienes que registrarte para poder ver los pedidos";
-            $productosController = new ProductosController();
-            return $productosController->mostrarProductos($emailSesion, $mensaje);
+            $categoriasController = new CategoriasController();
+            return $categoriasController->mostrarTodos($emailSesion, $mensaje);
         }
         // Obtener todos los pedidos
         $pedidos = $this->PedidosService->obtenerPedidos($userID);

@@ -11,12 +11,15 @@
         echo "</ul>";
     }
     ?>
-    <form class="registro-form" action="<?= BASE_URL ?>registro_usuario" method="POST">
-        <!-- Campos del formulario para el registro de usuario -->
-        <input type="text" name="nombre" placeholder="Nombre">
-        <input type="text" name="apellidos" placeholder="Apellidos">
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="contrasena" placeholder="Contraseña">
-        <button type="submit" name="registro">Registrarse</button>
-    </form>
+    <div class="registro-container">
+        <form class="registro-form" action="<?= BASE_URL ?>registro_usuario" method="POST">
+            <!-- Campos del formulario para el registro de usuario -->
+            <input type="text" name="nombre" placeholder="nombre">
+            <input type="text" name="apellidos" placeholder="apellidos">
+            <input type="email" name="email" placeholder="email">
+            <input type="password" name="contrasena" placeholder="contraseña">
+            <button type="submit" name="registro">Registrarse</button>
+        </form>
+    </div>
+    
 </main>

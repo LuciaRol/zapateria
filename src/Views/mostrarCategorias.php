@@ -9,6 +9,9 @@
 <body>
     <h2 class="card-h2">Categorías</h2>
     <div class="card-container">
+    <?php if (!empty($mensaje)): ?>
+            <p class="mensaje"><?php echo $mensaje; ?></p>
+    <?php endif; ?>
         <?php foreach ($categorias as $categoria): ?>
             <div class="card">
                 <div class="card-body">

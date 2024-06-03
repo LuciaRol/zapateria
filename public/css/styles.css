@@ -183,7 +183,6 @@ footer {
 
 /* USUARIO */
 
-
 .profile-info {
     display: flex;
     flex-direction: column;
@@ -237,6 +236,11 @@ h2 {
 .img_zapato{
 	max-width: 70px;
 }
+
+.editar-titulo{
+	margin-top: 14rem;
+}
+
 
 
 

@@ -70,48 +70,51 @@
             <p>No hay productos disponibles.</p>
         <?php endif; ?>
     
+        <!-- formulario para agregar nuevos productos -->
         <?php if ($rol === 'admin'): ?>
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="card-h2">Crear nuevo producto</h2>
-                    <form action="<?= BASE_URL ?>nuevo_producto" method="POST"> 
-                        <label for="nuevo_producto">Nombre del Producto:</label><br>
-                        <input type="text" id="nuevo_producto" name="nuevo_producto" required><br><br> 
-                        <label for="categoria">Categoría:</label><br>
-                        <select id="categoria" name="categoria" required>
-                            <?php foreach ($categorias as $categoria): ?>
-                                <option value="<?php echo htmlspecialchars($categoria->getId(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($categoria->getNombre(), ENT_QUOTES, 'UTF-8'); ?></option>
-                            <?php endforeach; ?>
-                        </select><br><br>
-                        <label for="descripcion">Descripción:</label><br>
-                        <textarea id="descripcion" name="descripcion" rows="4" cols="50"></textarea><br><br>
+            <div class="registro-container nuevo">
+                <h2 class="registro-form-heading">Crear nuevo producto</h2>
+                <div class="registro-form">
+                
+                <form action="<?= BASE_URL ?>nuevo_producto" method="POST" class="registro-formulario"> 
+                    <label for="nuevo_producto">Nombre del Producto:</label><br>
+                    <input type="text" id="nuevo_producto" name="nuevo_producto" required class="registro-input"><br><br> 
+                    <label for="categoria">Categoría:</label><br>
+                    <select id="categoria" name="categoria" required class="registro-select">
+                        <?php foreach ($categorias as $categoria): ?>
+                            <option value="<?php echo htmlspecialchars($categoria->getId(), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($categoria->getNombre(), ENT_QUOTES, 'UTF-8'); ?></option>
+                        <?php endforeach; ?>
+                    </select><br><br>
+                    <label for="descripcion">Descripción:</label><br>
+                    <textarea id="descripcion" name="descripcion" rows="4" cols="50" class="registro-textarea"></textarea><br><br>
 
-                        <label for="precio">Precio:</label><br>
-                        <input type="float" id="precio" name="precio" step="0.01" required><br><br>
+                    <label for="precio">Precio:</label><br>
+                    <input type="float" id="precio" name="precio" step="0.01" required class="registro-input"><br><br>
 
-                        <label for="stock">Stock:</label><br>
-                        <input type="float" id="stock" name="stock" required><br><br>
+                    <label for="stock">Stock:</label><br>
+                    <input type="float" id="stock" name="stock" required class="registro-input"><br><br>
 
-                        <label for="oferta">Oferta (opcional, máximo 2 caracteres):</label><br>
-                        <input type="text" id="oferta" name="oferta" maxlength="2"><br><br>
+                    <label for="oferta">Oferta (opcional, máximo 2 caracteres):</label><br>
+                    <input type="text" id="oferta" name="oferta" maxlength="2" class="registro-input"><br><br>
 
-                        <label for="fecha">Fecha:</label><br>
-                        <input type="date" id="fecha" name="fecha" required><br><br>
+                    <label for="fecha">Fecha:</label><br>
+                    <input type="date" id="fecha" name="fecha" required class="registro-input"><br><br>
 
-                        <label for="imagen">Imagen:</label><br>
-                        <select id="imagen" name="imagen" required>
-                            <?php for ($i = 1; $i <= 10; $i++): ?>
-                                <option value="zapato<?php echo $i; ?>.jpg">Zapato<?php echo $i; ?></option>
-                            <?php endfor; ?>
-                        </select><br><br>
+                    <label for="imagen">Imagen:</label><br>
+                    <select id="imagen" name="imagen" required class="registro-select">
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
+                            <option value="zapato<?php echo $i; ?>.jpg">Zapato<?php echo $i; ?></option>
+                        <?php endfor; ?>
+                    </select><br><br>
 
-                        <input type="submit" value="Crear Producto"> <!-- Cambiado el texto del botón para reflejar que se está creando un producto -->
-                    </form>
-                </div>
+                    <input type="submit" value="Crear Producto" class="registro-button"> <!-- Cambiado el texto del botón para reflejar que se está creando un producto -->
+                </form>
             </div>
+        </div>
+
         <?php endif; ?>
         <?php if ($rol === 'admin'): ?>
-             <h2>Editar productos ya existentes</h2>
+             <h2 class="editar-titulo">Editar productos ya existentes</h2>
         <table class="productos-table">
             <thead>
                 <tr>
@@ -119,7 +122,7 @@
                     <th>Categoría</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
-                    <th>Precio</th>
+                    <th>Precio (€)</th>
                     <th>Stock</th>
                     <th>Oferta</th>
                     <th>Fecha</th>

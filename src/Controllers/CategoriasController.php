@@ -25,7 +25,7 @@ class CategoriasController {
         $this->usuariosService = new UsuariosService();
     }
 
-    public function mostrarTodos($emailRecordado = null, $mensaje = '')
+    public function mostrarTodos($emailRecordado = null, $mensaje = ''): void
     {
         $categoriasModel = $this->todasCategorias();
         
@@ -41,7 +41,7 @@ class CategoriasController {
             $rol = $email->getRol(); }
 
         // Devolver la renderización de la página con los objetos de categoría, el correo electrónico de la sesión y el mensaje
-        return $this->pagina->render('mostrarCategorias', [
+        $this->pagina->render('mostrarCategorias', [
             'categorias' => $categoriasModel, 
             'emailSesion' => $emailSesion, 
             'mensaje' => $mensaje,
@@ -49,7 +49,7 @@ class CategoriasController {
         ]);
     }
 
-    public function todasCategorias(){
+    public function todasCategorias(): array {
         // Obtener todas las categorías
         $categorias = $this->categoriasService->obtenerCategorias();
 
@@ -66,7 +66,7 @@ class CategoriasController {
         return $categoriasModel;
     }
 
-    public function registroCategoria($nombreCategoria) {
+    public function registroCategoria($nombreCategoria):void {
         $mensaje = 'Regístrate como admin para crear la categoría'; // Inicializamos la variable de mensaje
         
         $usuarioController = new UsuarioController();

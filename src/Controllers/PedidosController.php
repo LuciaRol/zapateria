@@ -25,7 +25,7 @@ class PedidosController {
         $this->usuariosService = new UsuariosService();
     }
 
-    public function mostrarPedidos($emailRecordado = null, $userID = null) {
+    public function mostrarPedidos($emailRecordado = null, $userID = null): void {
         
         
         $usuarioController = new UsuarioController();
@@ -44,7 +44,7 @@ class PedidosController {
          if (!$emailSesion) {
             $mensaje = "Tienes que registrarte para poder ver los pedidos";
             $categoriasController = new CategoriasController();
-            return $categoriasController->mostrarTodos($emailSesion, $mensaje);
+            $categoriasController->mostrarTodos($emailSesion, $mensaje);
         }
         // Obtener todos los pedidos
         $pedidos = $this->PedidosService->obtenerPedidos($userID);
@@ -81,6 +81,6 @@ class PedidosController {
         }
     
         // Devolver la renderización de la página con los objetos de pedido y el correo electrónico de la sesión
-        return $this->pagina->render('mostrarPedidos', ['pedidos' => $pedidosModel, 'emailSesion' => $emailSesion]);
+        $this->pagina->render('mostrarPedidos', ['pedidos' => $pedidosModel, 'emailSesion' => $emailSesion]);
     }
 }

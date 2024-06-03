@@ -26,7 +26,7 @@ class ProductosController
         
     }
 
-    public function mostrarProductos($emailRecordado = null, $mensaje = null)
+    public function mostrarProductos($emailRecordado = null, $mensaje = null): void
     {
         // Obtener todos los productos
         $productos = $this->productosService->obtenerProductos();
@@ -66,10 +66,10 @@ class ProductosController
         $categoriasController = new CategoriasController();
         $categorias = $categoriasController->todasCategorias();
         // Devolver la renderización de la página con los objetos de producto y el correo electrónico de la sesión
-        return $this->pagina->render('mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'mensaje' => $mensaje, 'categorias' => $categorias]);
+        $this->pagina->render('mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'mensaje' => $mensaje, 'categorias' => $categorias]);
     }
 
-    public function registroProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen) {
+    public function registroProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen): void {
         $mensaje = 'Regístrate como admin para crear un producto'; // Inicializamos la variable de mensaje
         
         $usuarioController = new UsuarioController();
@@ -105,7 +105,7 @@ class ProductosController
         $this->mostrarProductos($email, $mensaje);
     }
 
-    public function editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha) {
+    public function editarProducto($productoId, $categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha): void {
         $mensaje = 'Regístrate como admin para editar un producto'; // Inicializamos la variable de mensaje
         
         $usuarioController = new UsuarioController();
@@ -142,7 +142,7 @@ class ProductosController
     }
     
    
-public function eliminarProducto($producto_id, $emailRecordado = null) {   
+public function eliminarProducto($producto_id, $emailRecordado = null): void {   
         $mensaje = 'Tienes que ser admin para borrar un producto'; // Inicializamos la variable de mensaje
 
         $usuarioController = new UsuarioController();
@@ -156,19 +156,19 @@ public function eliminarProducto($producto_id, $emailRecordado = null) {
 
 
                 // Mostrar el carrito después de eliminar el producto
-                return $this->mostrarProductos($email, $mensaje);
+                $this->mostrarProductos($email, $mensaje);
             }
             else {
-                return $this->mostrarProductos(null, $mensaje);
+                $this->mostrarProductos(null, $mensaje);
             }
         }
         else {
-            return $this->mostrarProductos(null, $mensaje);
+            $this->mostrarProductos(null, $mensaje);
 
         }
 }
 
-public function buscarProductos($terminoBusqueda)
+public function buscarProductos($terminoBusqueda): void
     {
         // Sanear el término de búsqueda
         $terminoBusqueda = Validacion::sanearString($terminoBusqueda);
@@ -209,7 +209,7 @@ public function buscarProductos($terminoBusqueda)
         $categorias = $categoriasController->todasCategorias();
 
         // Devolver la renderización de la página con los resultados de búsqueda
-        return $this->pagina->render('mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'terminoBusqueda' => $terminoBusqueda, 'categorias' => $categorias]);
+        $this->pagina->render('mostrarProductos', ['productos' => $productosModel, 'emailSesion' => $emailSesion, 'rol' => $rol, 'terminoBusqueda' => $terminoBusqueda, 'categorias' => $categorias]);
     }
 
 }

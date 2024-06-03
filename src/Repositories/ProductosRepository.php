@@ -132,7 +132,7 @@
             try {
 
                 $descripcion = strtolower($descripcion);
-
+                $descripcion = '%' . $descripcion . '%';
                 $this->sql = $this->conexion->prepareSQL("SELECT    a.id, 
                                                             a.categoria_id, 
                                                             a.nombre, 

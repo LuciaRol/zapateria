@@ -6,8 +6,8 @@ use Lib\Pages;
 use Models\Categoria; 
 use Models\Validacion; 
 use Services\UsuariosService; 
-
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 class UsuarioController {
 
     private Pages $pagina;
@@ -30,13 +30,45 @@ class UsuarioController {
     
         $usuariosService = new UsuariosService();
         $resultado = $usuariosService->register($nombre, $apellidos, $email, $contrasena, $rol);
-        $categoriasController = new CategoriasController();
+        
 
+        $this->mailregistro($nombre, $email);
+
+        $categoriasController = new CategoriasController();
         return $categoriasController->mostrarTodos();
         
         }
-    
-   
+        public function mailregistro($nombre, $email) {
+            $mail = new PHPMailer(true);
+        
+            try {
+                // Configuración del servidor SMTP
+                $mail->isSMTP();
+                $mail->Host = getenv('MAIL_HOST');
+                $mail->SMTPAuth = true;
+                $mail->Username = getenv('MAIL_USERNAME');
+                $mail->Password = getenv('MAIL_PASSWORD');
+                $mail->Port = getenv('MAIL_PORT');
+                $mail->SMTPSecure = getenv('MAIL_ENCRYPTION'); 
+        
+                // Detalles del remitente y del destinatario
+                $mail->setFrom(getenv('MAIL_FROM_ADDRESS'), getenv('MAIL_FROM_NAME'));
+                $mail->addAddress($email, $nombre);
+        
+                // Contenido del correo
+                $mail->isHTML(true);
+                $mail->Subject = 'Registro en la zapatería';
+                $mail->Body = 'Acabas de registrarte';
+        
+                // Envío del correo
+                $mail->send();
+        
+                return 'Correo electrónico enviado';
+            } catch (Exception $e) {
+                return 'Error al enviar el correo: ' . $mail->ErrorInfo;
+            }
+        }
+
     public function login($email, $password) {
         
         $error = ''; // Creamos esta variable para que si todo va bien, no de error al mostrarBlog

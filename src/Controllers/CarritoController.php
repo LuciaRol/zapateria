@@ -36,7 +36,7 @@ class CarritoController
         
     }
 
-    public function agregarAlCarrito($productoId, $emailRecordado =null)
+    public function agregarAlCarrito($productoId, $emailRecordado =null): void
     {
         // Obtener el producto de la base de datos utilizando el ID
         $producto = $this->productosService->obtenerProductoPorId($productoId);
@@ -57,17 +57,17 @@ class CarritoController
 
                     
                     // Renderizar la página del carrito con los productos actualizados
-                    return $this->mostrarCarrito($emailSesion);                
+                    $this->mostrarCarrito($emailSesion);                
                 }
         } else {
             // Si no se encontró el usuario, vuelve a la página principal
             $mensaje = "Tienes que registrate para poder agregar productos";
             $productosController = new ProductosController();
-            return $productosController->mostrarProductos($emailSesion, $mensaje);
+            $productosController->mostrarProductos($emailSesion, $mensaje);
  ;
         }
     }
-    public function eliminarDelCarrito($key, $emailRecordado = null)
+    public function eliminarDelCarrito($key, $emailRecordado = null):  void
     {
         $usuarioController = new UsuarioController();
         if ($usuarioController->sesion_usuario()) {
@@ -80,26 +80,26 @@ class CarritoController
             }
 
             // Mostrar el carrito después de eliminar el producto
-            return $this->mostrarCarrito($emailSesion);
+            $this->mostrarCarrito($emailSesion);
         }
     }
 
-    public function mostrarCarrito($emailSesion = null)
+    public function mostrarCarrito($emailSesion = null): void
     {
         $usuarioController = new UsuarioController();
         if ($usuarioController->sesion_usuario()) {
             $emailSesion = $usuarioController->obtenerEmailUsuario($emailSesion);
             
-            return $this->pagina->render('mostrarCarrito', ['emailSesion' => $emailSesion]);
+            $this->pagina->render('mostrarCarrito', ['emailSesion' => $emailSesion]);
         }
         else{
             $mensaje = "Tienes que registrarte para poder ver el carrito";
             $categoriasController = new CategoriasController();
-            return $categoriasController->mostrarTodos($emailSesion, $mensaje);
+            $categoriasController->mostrarTodos($emailSesion, $mensaje);
         }
     }
 
-    function comprar($provincia, $localidad,$direccion, $emailSesion = null) {
+    function comprar($provincia, $localidad,$direccion, $emailSesion = null): void {
         $usuarioController = new UsuarioController();
             if ($usuarioController->sesion_usuario()) {
                 $emailSesion = $usuarioController->obtenerEmailUsuario($emailSesion);
@@ -157,53 +157,14 @@ class CarritoController
                         
 
                             // Renderizar la página de mostrarCarrito con el email de sesión
-                        return $this-> mostrarCarrito($emailSesion);
+                        $this-> mostrarCarrito($emailSesion);
                         
                     }
                     else {
-                        return $this-> mostrarCarrito($emailSesion);
+                        $this-> mostrarCarrito($emailSesion);
                     }
     }    
 }
 
 
-function enviarEmailAlUsuario($email, $pedido_id) {
-    $asunto = "Confirmación de Pedido";
-    $mensaje = "<html>
-    <head>
-        <title>Confirmación de Pedido</title>
-    </head>
-    <body>
-        <h1>Gracias por tu compra</h1>
-        <p>Tu pedido ha sido enviado con éxito. El número de tu pedido es <strong>{$pedido_id}</strong>.</p>
-    </body>
-    </html>";
-
-    $mail = new PHPMailer(true);
-    try {
-        //Server settings
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'luciarodriguezaplicaciones@gmail.com';
-        $mail->Password = 'HomerSimpson';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
-
-        //Recipients
-        $mail->setFrom('luciarodriguezaplicaciones@gmail.com', 'Zapateria');
-        $mail->addAddress($email);
-
-        //Content
-        $mail->isHTML(true);
-        $mail->Subject = $asunto;
-        $mail->Body    = $mensaje;
-
-        $mail->send();
-        return true;
-    } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        return false;
-    }
-}
 }

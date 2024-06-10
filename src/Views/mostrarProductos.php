@@ -52,13 +52,13 @@
                                 <!-- Formulario para agregar al carrito -->
                                 <form action="<?= BASE_URL ?>agregar_al_carrito" method="POST" style="display:inline;">
                                     <input type="hidden" name="producto_id" value="<?php echo htmlspecialchars($producto->getId(), ENT_QUOTES, 'UTF-8'); ?>">
-                                    <button type="submit">Agregar al carrito</button>
+                                    <button type="submit" class="form-submit">Agregar al carrito</button>
                                 </form>
                                 <?php if ($rol === 'admin'): ?>
                                     <!-- Formulario para eliminar producto -->
                                     <form action="<?= BASE_URL ?>eliminar_producto" method="POST" style="display:inline;">
                                         <input type="hidden" name="producto_id" value="<?php echo htmlspecialchars($producto->getId(), ENT_QUOTES, 'UTF-8'); ?>">
-                                        <button type="submit">Borrar Producto</button>
+                                        <button type="submit" class="form-submit">Borrar producto</button>
                                     </form>
                                 <?php endif; ?>
                             </td>
@@ -107,7 +107,7 @@
                         <?php endfor; ?>
                     </select><br><br>
 
-                    <input type="submit" value="Crear Producto" class="registro-button"> <!-- Cambiado el texto del botón para reflejar que se está creando un producto -->
+                    <input type="submit" value="Crear producto" class="registro-button form-submit"> <!-- Cambiado el texto del botón para reflejar que se está creando un producto -->
                 </form>
             </div>
         </div>
@@ -150,7 +150,7 @@
                                             <img class="img_zapato" src="<?php echo htmlspecialchars('public/img/' . ($producto->getImagen() ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
                                         </td>
                             <td>
-                                <button type="submit">Guardar</button> <!-- No es necesario el formulario en la celda de acciones -->
+                                <button type="submit" class="form-submit">Guardar</button> <!-- No es necesario el formulario en la celda de acciones -->
                             </td>
                         </form>
                     </tr>

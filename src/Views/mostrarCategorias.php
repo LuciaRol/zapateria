@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Categorías</title>
+    <title>Lista de categorías</title>
     <link rel="stylesheet" type="text/css" href="public/css/styles.css">
 </head>
 <body>
@@ -21,7 +21,7 @@
                         <!-- Formulario para mostrar productos de esta categoría -->
                         <form action="<?= BASE_URL ?>busqueda" method="POST">
                             <input type="hidden" name="q" value="<?php echo $categoria->getNombre(); ?>">
-                            <input type="submit" value="Mostrar productos de categoría">
+                            <input type="submit" value="Mostrar productos de categoría" class="form-submit">
                         </form>
                     </article>
                 </div>
@@ -31,24 +31,25 @@
 
     <!-- Formulario para crear una nueva categoría -->
     <?php if ($rol === 'admin'): ?>
-    <div class="card">
+    <div class="card2">
         <div class="card-body">
-            <h2 class="card-h2">Crear Nueva Categoría</h2>
-            <form action="<?= BASE_URL ?>registro_categoria" method="POST"> 
-                <label for="nueva_categoria">Nombre:</label>
-                <input type="text" id="nueva_categoria" name="nueva_categoria" required><br><br>
-                <input type="submit" value="Crear Categoría">
+            <h2 class="card-h2">Crear nueva categoría</h2>
+            <form action="<?= BASE_URL ?>registro_categoria" method="POST" class="form-categoria">
+                <label for="nueva_categoria" class="form-label">Nombre:</label>
+                <input type="text" id="nueva_categoria" name="nueva_categoria" required class="form-input"><br><br>
+                <input type="submit" value="Crear categoría" class="form-submit">
             </form>
         </div>
     </div>
-    <?php endif; ?>
+<?php endif; ?>
 
-    <!-- Display message if it exists -->
-    <?php if (!empty($mensaje)): ?>
-        <div class="message">
-            <p><?php echo htmlspecialchars($mensaje, ENT_QUOTES, 'UTF-8'); ?></p>
-        </div>
-    <?php endif; ?>
+<!-- Display message if it exists -->
+<?php if (!empty($mensaje)): ?>
+    <div class="message">
+        <p><?php echo htmlspecialchars($mensaje, ENT_QUOTES, 'UTF-8'); ?></p>
+    </div>
+<?php endif; ?>
+
 
 </body>
 </html>

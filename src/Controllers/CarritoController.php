@@ -6,8 +6,8 @@ use Services\PedidosService;
 use Services\ProductosService;
 use Lib\Pages;
 use Services\UsuariosService;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+use Controllers\MailController;
+
 
 class CarritoController
 {
@@ -17,6 +17,9 @@ class CarritoController
 
     private PedidosService $pedidosService;
     private array $productosEnCarrito; // Aquí almacenaremos los productos en el carrito
+
+    private MailController $MailController;
+
 
 
     public function __construct()
@@ -29,6 +32,9 @@ class CarritoController
         $this->usuariosService = new UsuariosService();
 
         $this->pedidosService = new PedidosService();
+
+        $this->MailController = new MailController();
+
         
         // Inicializa el array de productos en el carrito
         $this->productosEnCarrito = [];
@@ -143,14 +149,25 @@ class CarritoController
                                 $cantidad_productos[$producto_id] = 1;
                             }
                         }
-
                         // Ahora, guardamos los productos en la base de datos
                         foreach ($cantidad_productos as $producto_id => $unidades) {
                             $guardar_productos_pedido = $this->pedidosService->guardarProductosPedido($pedido_id, $producto_id, $unidades);
                         }
 
-                        // Error al conectar enviar el mail por la seguridad de google
-                        //$this->enviarEmailAlUsuario($emailSesion, $pedido_id);
+                        // Crear el array de productos para el correo
+                        $productos = array();
+                        foreach ($_SESSION['carrito'] as $producto) {
+                            $productos[] = array(
+                                'nombre' => $producto['nombre'],
+                                'cantidad' => $cantidad_productos[$producto['id']],
+                                'precio' => $producto['precio']
+                            );
+                        }
+
+                        // Enviar el correo
+                        $MailController = new MailController();
+                        $MailController->mailcompra($pedido_id, $emailSesion, $direccion, $provincia, $localidad, $coste_total, $productos);
+
 
                         // Vaciar el carrito después de realizar la compra
                          unset($_SESSION['carrito']);

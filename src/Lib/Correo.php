@@ -8,12 +8,13 @@ $mail = new PHPMailer(true); // Passing `true` enables exceptions
 
 try {
     $mail->isSMTP();
-    $mail->Host = 'live.smtp.mailtrap.io'; // Your SMTP server
+    $mail->Host = 'sandbox.smtp.mailtrap.io';
     $mail->SMTPAuth = true;
-    $mail->Username = 'sepharat@gmail.com'; // Your Mailtrap username
-    $mail->Password = 'Hola1234**'; // Your Mailtrap password
-    $mail->SMTPSecure = 'tls';
+    $mail->Username = '41d8c9900b45a9';
+    $mail->Password = '824ee0f2e06aaf';
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 2525;
+
 
     // Sender and recipient settings
     $mail->setFrom('luciapalicaciones@mailtrap.io', 'luciaaplicaciones');

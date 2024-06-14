@@ -191,7 +191,17 @@
             }
         });
         
-        
+        Router::add('POST', '/cambioestadopedido', function () {
+            // Verificar si se ha enviado el formulario para cambiar el estado del pedido
+            if (isset($_POST['pedido_id']) && isset($_POST['nuevo_estado'])) {
+                // Obtener la información del formulario
+                $pedido_id = $_POST['pedido_id'];
+                $nuevo_estado = $_POST['nuevo_estado'];
+                
+                // Llamar a la función para cambiar el estado del pedido pasando los parámetros necesarios
+                return (new PedidosController())->nuevoestado($pedido_id, $nuevo_estado);
+            }
+        });
         
 
         Router::add('POST', '/comprar_carrito', function () {
@@ -208,6 +218,8 @@
                 return (new CarritoController())->comprar($provincia, $localidad, $direccion);
             }
         });
+
+
         Router::add('POST', '/busqueda', function () {
             if (isset($_POST['q'])) {
                 $terminoBusqueda = trim($_POST['q']);

@@ -25,6 +25,37 @@ class PedidosController {
         $this->usuariosService = new UsuariosService();
     }
 
+
+    public function nuevoestado($pedido_id, $nuevo_estado, $emailRecordado = null): void {
+
+        $usuarioController = new UsuarioController();
+        // Obtener el email del usuario
+        $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
+
+        if ($usuarioController->sesion_usuario()) {
+            // Obtén el usuario actual
+            $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
+            
+            // Verifica si el usuario tiene permisos de administrador
+            $userID = $email->getId();
+            $rol = $email -> getRol();
+
+         }
+        
+        if ($rol!= 'admin') {
+            $mensaje = 'Hace falta ser administrador para poder hacer este cambio.';
+            $categoriasController = new CategoriasController();
+            $categoriasController->mostrarTodos($emailSesion, $mensaje);
+            }
+        // Hacemos el cambio del estado
+        $pedidos = $this->PedidosService->nuevoEstado($pedido_id, $nuevo_estado);
+
+        $this->mostrarPedidos();
+}
+
+
+
+
     public function mostrarPedidos($emailRecordado = null, $userID = null): void {
         
         
@@ -37,7 +68,9 @@ class PedidosController {
             $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);
             
             // Verifica si el usuario tiene permisos de administrador
-            $userID = $email->getId(); }
+            $userID = $email->getId();
+            $rol = $email -> getRol();
+         }
 
         
          // Si no hay email de sesión, redirigir a mostrarTodos en CategoriasController
@@ -79,8 +112,13 @@ class PedidosController {
         if (!$emailSesion && $emailRecordado) {
             $emailSesion = $emailRecordado;
         }
+
+        
     
         // Devolver la renderización de la página con los objetos de pedido y el correo electrónico de la sesión
-        $this->pagina->render('mostrarPedidos', ['pedidos' => $pedidosModel, 'emailSesion' => $emailSesion]);
+        $this->pagina->render('mostrarPedidos', ['pedidos' => $pedidosModel, 'emailSesion' => $emailSesion, 'rol' => $rol]);
     }
+
+
+    
 }

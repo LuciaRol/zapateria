@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="public/css/styles.css">
 <body>
     <main>
@@ -17,6 +16,9 @@
                         <th>Estado</th>
                         <th>Fecha</th>
                         <th>Hora</th>
+                        <?php if ($rol === 'admin'): ?> <!-- Verifica el rol del usuario -->
+                            <th>Acciones</th> <!-- Añade una columna para las acciones -->
+                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +33,21 @@
                             <td><?= htmlspecialchars($pedido->getEstado()); ?></td>
                             <td><?= htmlspecialchars($pedido->getFecha()); ?></td>
                             <td><?= htmlspecialchars($pedido->getHora()); ?></td>
+                            <?php if ($rol === 'admin'): ?> <!-- Verifica el rol del usuario -->
+                                <td>
+                                    <form  action="<?= BASE_URL ?>cambioestadopedido" method="post">
+                                        <input type="hidden" name="pedido_id" value="<?= $pedido->getId(); ?>">
+                                        <select name="nuevo_estado">
+                                            <option value="No enviado">No enviado</option>
+                                            <option value="pendiente">Pendiente</option>
+                                            <option value="en_proceso">En proceso</option>
+                                            <option value="completado">Completado</option>
+                                            <option value="cancelado">Cancelado</option>
+                                        </select>
+                                        <button type="submit">Cambiar Estado</button>
+                                    </form>
+                                </td>
+                            <?php endif; ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

@@ -33,4 +33,12 @@
             return $this->PedidosRepository->guardarProductosPedido($pedido_id, $producto_id, $unidades);
                                                     
         }
+
+        public function nuevoEstado(int $pedido_id, string $nuevo_estado):bool {
+        
+            return $this->PedidosRepository->nuevoEstado($pedido_id, $nuevo_estado);
+                                                    
+        }
+
+       
     }

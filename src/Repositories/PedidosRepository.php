@@ -110,5 +110,22 @@
             }
         }
 
+
+        public function nuevoEstado($pedido_id, $nuevo_estado):bool {
+            try {
+                $this->sql = $this->conexion->prepareSQL("
+                                                            UPDATE pedidos SET 
+                                                                estado = :nuevo_estado
+                                                            WHERE id = :pedido_id
+                                                        ");
+                $this->sql->bindParam(':nuevo_estado', $nuevo_estado, PDO::PARAM_STR);
+                $this->sql->bindParam(':pedido_id', $pedido_id, PDO::PARAM_INT);
+                $this->sql->execute();
+                return true;
+            } catch (PDOException $e) {
+                return false;
+            }
+        }
+
         
     }

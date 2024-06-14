@@ -84,6 +84,21 @@
             }
         }
         
+        public function bajarStockProductos(int $productoId, int $unidades): bool {
+            try {
+                $this->sql = $this->conexion->prepareSQL("
+                                                            UPDATE productos SET 
+                                                                stock = stock - :unidades 
+                                                            WHERE id = :productoId
+                                                        ");
+                $this->sql->bindParam(':unidades', $unidades, PDO::PARAM_INT);
+                $this->sql->bindParam(':productoId', $productoId, PDO::PARAM_INT);
+                $this->sql->execute();
+                return true;
+            } catch (PDOException $e) {
+                return false;
+            }
+        }
         
 
         public function findById(int $id): ?array {

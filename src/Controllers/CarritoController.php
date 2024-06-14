@@ -152,6 +152,7 @@ class CarritoController
                         // Ahora, guardamos los productos en la base de datos
                         foreach ($cantidad_productos as $producto_id => $unidades) {
                             $guardar_productos_pedido = $this->pedidosService->guardarProductosPedido($pedido_id, $producto_id, $unidades);
+                            $bajar_stock_productos = $this->productosService->bajarStockProductos($producto_id, $unidades);
                         }
 
                         // Crear el array de productos para el correo

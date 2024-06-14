@@ -12,6 +12,12 @@
             return $this->productosRepository->findAll();
         }
         
+        public function bajarStockProductos(int $producto_id, int $unidades): bool {
+            // Crear un nuevo pedido en la base de datos utilizando el repositorio
+        
+            return $this->productosRepository->bajarStockProductos($producto_id, $unidades);
+                                                    
+        }
         
         public function guardarProducto(int $categoria_id, string $nombreProducto, string $descripcion, float $precio, int $stock, ?string $oferta, string $fecha, string $imagen): bool {
             return $this->productosRepository->guardarProducto($categoria_id, $nombreProducto, $descripcion, $precio, $stock, $oferta, $fecha, $imagen);

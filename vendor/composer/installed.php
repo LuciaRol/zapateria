@@ -3,7 +3,7 @@
         'name' => 'lucia/zapateria',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '5c853b3eecfa961c252c5746714fb82107ff3fc9',
+        'reference' => '404622fe52ddb1d7dca75d34b7ff84293e0e8bbf',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'lucia/zapateria' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '5c853b3eecfa961c252c5746714fb82107ff3fc9',
+            'reference' => '404622fe52ddb1d7dca75d34b7ff84293e0e8bbf',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

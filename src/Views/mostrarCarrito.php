@@ -7,7 +7,6 @@
 </head>
 <body>
     <main>
-        
         <h2>Productos en el Carrito</h2>
         
         <?php if (!empty($_SESSION['carrito'])): ?>
@@ -23,27 +22,28 @@
                         <th>Oferta</th>
                         <th>Fecha</th>
                         <th>Imagen</th>
+                        <th>Cantidad</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($_SESSION['carrito'] as $key => $producto): ?>
+                <?php foreach ($_SESSION['carrito'] as $key => $item): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($producto['id'], ENT_QUOTES, 'UTF-8'); ?></td>
-                        <td><?php echo htmlspecialchars($producto['categoria_id'], ENT_QUOTES, 'UTF-8'); ?></td>
-                        <td><?php echo htmlspecialchars($producto['nombre'], ENT_QUOTES, 'UTF-8'); ?></td>
-                        <td><?php echo htmlspecialchars($producto['descripcion'] ?? 'Sin descripción', ENT_QUOTES, 'UTF-8'); ?></td>
-                        <td><?php echo htmlspecialchars($producto['precio'], ENT_QUOTES, 'UTF-8'); ?></td>
-                        <td><?php echo htmlspecialchars($producto['stock'], ENT_QUOTES, 'UTF-8'); ?></td>
-                        <td><?php echo htmlspecialchars($producto['oferta'] ?? 'No', ENT_QUOTES, 'UTF-8'); ?></td>
-                        <td><?php echo htmlspecialchars($producto['fecha'], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($item['producto']['id'], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($item['producto']['categoria_id'], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($item['producto']['nombre'], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($item['producto']['descripcion'] ?? 'Sin descripción', ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($item['producto']['precio'], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($item['producto']['stock'], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($item['producto']['oferta'] ?? 'No', ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($item['producto']['fecha'], ENT_QUOTES, 'UTF-8'); ?></td>
                         <td>
-                            <img class="img_zapato" src="<?php echo htmlspecialchars('public/img/' . ($producto['imagen'] ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
+                            <img class="img_zapato" src="<?php echo htmlspecialchars('public/img/' . ($item['producto']['imagen'] ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
                         </td>
-
+                        <td><?php echo htmlspecialchars($item['cantidad'], ENT_QUOTES, 'UTF-8'); ?></td>
                         <td> 
                             <form method="POST" action="<?= BASE_URL ?>eliminar_producto_carrito">
-                                <input type="hidden" name="producto_id" value="<?php echo $producto['id']; ?>">
+                                <input type="hidden" name="producto_id" value="<?php echo $item['producto']['id']; ?>">
                                 <input type="hidden" name="producto_key" value="<?php echo $key; ?>"> <!-- Aquí añadimos la clave del producto -->
                                 <button type="submit" class="eliminar-btn form-submit">Eliminar</button>
                             </form>
@@ -61,11 +61,9 @@
                 <input type="text" id="direccion" name="direccion" required class="purchase-form-input"><br>
                 <button type="submit" class="form-submit">Comprar</button>
             </form>
-
-            
         <?php else: ?>
             <p>No hay productos en el carrito.</p>
         <?php endif; ?>
-
+    </main>
 </body>
 </html>

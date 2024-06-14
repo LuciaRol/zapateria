@@ -109,10 +109,11 @@
 
         Router::add('POST', '/agregar_al_carrito', function () {
             // Verificar si se ha enviado el formulario para agregar un producto al carrito
-            if (isset($_POST['producto_id'])) {
+            if (isset($_POST['producto_id'], $_POST['cantidad'])) {
                 // Obtener el ID del producto desde el formulario
                 $productoId = $_POST['producto_id'];
-                return (new CarritoController())->agregarAlCarrito($productoId);
+                $cantidad = $_POST['cantidad'];
+                return (new CarritoController())->agregarAlCarrito($productoId, $cantidad);
                
             }
         });

@@ -50,8 +50,9 @@
                             </td>
                             <td>
                                 <!-- Formulario para agregar al carrito -->
-                                <form action="<?= BASE_URL ?>agregar_al_carrito" method="POST" style="display:inline;">
+                                <form action="<?= BASE_URL ?>agregar_al_carrito" method="POST" style="display:inline;" onsubmit="return verificarStock(this);">
                                     <input type="hidden" name="producto_id" value="<?php echo htmlspecialchars($producto->getId(), ENT_QUOTES, 'UTF-8'); ?>">
+                                    <input type="number" name="cantidad" min="1" max="<?php echo htmlspecialchars($producto->getStock(), ENT_QUOTES, 'UTF-8'); ?>" required>
                                     <button type="submit" class="form-submit">Agregar al carrito</button>
                                 </form>
                                 <?php if ($rol === 'admin'): ?>
@@ -89,10 +90,10 @@
                     <textarea id="descripcion" name="descripcion" rows="4" cols="50" class="registro-textarea"></textarea><br><br>
 
                     <label for="precio">Precio:</label><br>
-                    <input type="float" id="precio" name="precio" step="0.01" required class="registro-input"><br><br>
+                    <input type="number" id="precio" name="precio" step="0.01" required class="registro-input"><br><br>
 
                     <label for="stock">Stock:</label><br>
-                    <input type="float" id="stock" name="stock" required class="registro-input"><br><br>
+                    <input type="number" id="stock" name="stock" required class="registro-input"><br><br>
 
                     <label for="oferta">Oferta (opcional, máximo 2 caracteres):</label><br>
                     <input type="text" id="oferta" name="oferta" maxlength="2" class="registro-input"><br><br>
@@ -142,13 +143,13 @@
                             <td><?php echo htmlspecialchars($producto->getNombre_categoria(), ENT_QUOTES, 'UTF-8'); ?></td>
                             <td><input type="text" name="nombre" value="<?php echo htmlspecialchars($producto->getNombre(), ENT_QUOTES, 'UTF-8'); ?>"></td>
                             <td><textarea name="descripcion"><?php echo htmlspecialchars($producto->getDescripcion() ?? 'Sin descripción', ENT_QUOTES, 'UTF-8'); ?></textarea></td>
-                            <td><input type="number" name="precio" value="<?php echo htmlspecialchars($producto->getPrecio(), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                            <td><input type="number" name="precio" step="0.01" value="<?php echo htmlspecialchars($producto->getPrecio(), ENT_QUOTES, 'UTF-8'); ?>"></td>
                             <td><input type="number" name="stock" value="<?php echo htmlspecialchars($producto->getStock(), ENT_QUOTES, 'UTF-8'); ?>"></td>
                             <td><input type="text" name="oferta" maxlength="2" value="<?php echo htmlspecialchars($producto->getOferta() ?? 'No', ENT_QUOTES, 'UTF-8'); ?>"></td>
                             <td><input type="date" name="fecha" value="<?php echo htmlspecialchars($producto->getFecha(), ENT_QUOTES, 'UTF-8'); ?>"></td>
                             <td>
-                                            <img class="img_zapato" src="<?php echo htmlspecialchars('public/img/' . ($producto->getImagen() ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
-                                        </td>
+                                <img class="img_zapato" src="<?php echo htmlspecialchars('public/img/' . ($producto->getImagen() ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen del producto">
+                            </td>
                             <td>
                                 <button type="submit" class="form-submit">Guardar</button> <!-- No es necesario el formulario en la celda de acciones -->
                             </td>
@@ -156,8 +157,19 @@
                     </tr>
                 <?php endforeach; ?>
         <?php endif; ?>
-</tbody>
-</table>
+            </tbody>
+        </table>
     </main>
+    <script>
+        function verificarStock(form) {
+            const cantidad = form.querySelector('input[name="cantidad"]').value;
+            const stock = form.querySelector('input[name="cantidad"]').max;
+            if (parseInt(cantidad) > parseInt(stock)) {
+                alert("La cantidad no puede ser mayor que el stock disponible.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>

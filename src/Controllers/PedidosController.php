@@ -60,7 +60,7 @@ class PedidosController {
         $usuarioController = new UsuarioController();
         // Obtener el email del usuario
         $emailSesion = $usuarioController->obtenerEmailUsuario($emailRecordado);
-
+        $rol = null;
         if ($usuarioController->sesion_usuario()) {
             // Obtén el usuario actual
             $email = $this->usuariosService->obtenerUsuarioPorEmail($_SESSION['email']);

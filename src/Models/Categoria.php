@@ -4,8 +4,10 @@ namespace Models;
 
 class Categoria {
 
-    private $id;
-    private $nombre;
+    private int $id;
+    private string $nombre;
+
+    private string $imagen;
     
     public function getId() {
         return $this->id;
@@ -21,6 +23,14 @@ class Categoria {
 
     public function setNombre($nombre) {
         $this->nombre = $nombre;
+    }
+
+    public function getImagen() {
+        return $this->imagen;
+    }
+
+    public function setImagen($imagen) {
+        $this->imagen = $imagen;
     }
 }
 

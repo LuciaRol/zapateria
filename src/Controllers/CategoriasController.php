@@ -60,13 +60,14 @@ class CategoriasController {
             $categoriaModel = new Categoria();
             $categoriaModel->setId($categoria['id']);
             $categoriaModel->setNombre($categoria['nombre']);
+            $categoriaModel->setImagen($categoria['imagen']);
             // Agregar la instancia de Categoria al array
             $categoriasModel[] = $categoriaModel;
         }
         return $categoriasModel;
     }
 
-    public function registroCategoria($nombreCategoria):void {
+    public function registroCategoria($nombreCategoria, $imagen):void {
         $mensaje = 'Regístrate como admin para crear la categoría'; // Inicializamos la variable de mensaje
         
         $usuarioController = new UsuarioController();
@@ -80,13 +81,14 @@ class CategoriasController {
             if ($email->getRol() === 'admin') {
                 $nombreCategoria = Validacion::sanearCategoria($nombreCategoria);
                 
+                
 
                 if (empty($nombreCategoria)) {
                     // Si el nombre de la categoría está vacío, asignar un mensaje de error
                     $mensaje = "Debe proporcionar un nombre para la nueva categoría.";
                 } else {
                     // Guardar la nueva categoría si no está vacía
-                    $this->categoriasService->guardarCategoria($nombreCategoria);
+                    $this->categoriasService->guardarCategoria($nombreCategoria, $imagen);
                     $mensaje = "Categoría creada exitosamente.";
                 }
             } else {

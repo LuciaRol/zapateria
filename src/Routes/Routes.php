@@ -98,12 +98,13 @@
             if (isset($_POST['nueva_categoria'])) {
                 // Obtener el nombre de la nueva categoría desde el formulario
                 $nombreCategoria = $_POST['nueva_categoria'];
+                $imagen = $_POST['imagen'];
                 
                 // Crear una instancia del controlador de categorías
                 $categoriasController = new CategoriasController();
                 
                 // Llamar al método para registrar una nueva categoría del controlador de categorías
-                $categoriasController->registroCategoria($nombreCategoria);
+                $categoriasController->registroCategoria($nombreCategoria, $imagen);
             }
         });
 

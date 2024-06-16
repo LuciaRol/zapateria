@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="card-body">
                     <article class="categoria">
-                        <p>ID: <?php echo $categoria->getId(); ?></p>
+                    <img class="img_zapato" src="<?php echo htmlspecialchars('public/img/' . ($categoria->getImagen() ?? 'placeholder.jpg'), ENT_QUOTES, 'UTF-8'); ?>" alt="Imagen de categoria">
                         <p>Nombre: <?php echo $categoria->getNombre(); ?></p>
                         <!-- Formulario para mostrar productos de esta categoría -->
                         <form action="<?= BASE_URL ?>busqueda" method="POST">
@@ -38,6 +38,13 @@
                 <label for="nueva_categoria" class="form-label">Nombre:</label>
                 <input type="text" id="nueva_categoria" name="nueva_categoria" required class="form-input"><br><br>
                 <input type="submit" value="Crear categoría" class="form-submit">
+                <label for="imagen">Imagen:</label><br>
+                    <select id="imagen" name="imagen" required class="registro-select">
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
+                            <option value="zapato<?php echo $i; ?>.jpg">Zapato<?php echo $i; ?></option>
+                        <?php endfor; ?>
+                </select><br><br>
+
             </form>
         </div>
     </div>

@@ -8,12 +8,12 @@ USE tienda;
 ('usur2', 'usur2', 'usur2@usur2.com', 'usur2', 'usur');
 */ -- No se pueden crear los datos con simples inserts dado que PhP encripta la contraseña. Hay que crear los usuarios primero en la aplicación y luego hacer los inserts
 -- Insertar datos en la tabla categorias
-INSERT INTO categorias (nombre) VALUES
-('Zapatos de Vestir'),
-('Zapatillas Deportivas'),
-('Botas'),
-('Sandalias'),
-('Zapatos Casuales');
+INSERT INTO categorias (nombre, imagen) VALUES
+('Zapatos de Vestir', 'zapato1.jpg'),
+('Zapatillas Deportivas', 'zapato2.jpg'),
+('Botas', 'zapato3.jpg'),
+('Sandalias', 'zapato4.jpg'),
+('Zapatos Casuales', 'zapato5.jpg');
 
 -- Insertar datos en la tabla productos
 INSERT INTO productos (categoria_id, nombre, descripcion, precio, stock, oferta, fecha, imagen) VALUES
